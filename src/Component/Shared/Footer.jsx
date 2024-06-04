@@ -4,8 +4,8 @@ import { FaInstagramSquare } from 'react-icons/fa';
 
 const Footer = () => {
   return (
-<div>
-<footer className="footer  max-w-[1640px] mb-2 mx-auto py-16 rounded-2xl px-36 bg-[#FFE8C8]  text-base-content">
+<div className=' bg-[#FFE8C8]'>
+<footer className="footer justify-between  mb-2 mx-auto pt-16 pb-10 rounded-2xl px-64    text-base-content">
       <aside className=''> 
       <img className=" w-[300px]" src={navLogo} alt="" />
         <div className=' w-[400px]'>
@@ -47,7 +47,7 @@ const Footer = () => {
       </nav>
     </footer>
     <div className=''>
-    <p className=' text-center '>2024 © all right reserved by MediMall</p>
+    <p className='pb-5 text-center '>2024 © all right reserved by MediMall</p>
     </div>
 </div>
   );

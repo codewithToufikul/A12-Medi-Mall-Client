@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { useEffect } from "react";
 import navLogo from '../../../assets/navLogo.png';
 
@@ -101,7 +101,7 @@ const Navbar = () => {
     <li><a>Item 2</a></li>
   </ul>
 </details>
-        <a className="= py-1 px-5 bg-transparent border-2 hover:bg-[#f99a00] hover:text-white text-2xl font-semibold text-[#f99a00] rounded-md border-[#f99a00]">Join US</a>
+        <Link to="/login" className="= py-1 px-5 bg-transparent border-2 hover:bg-[#f99a00] hover:text-white text-2xl font-semibold text-[#f99a00] rounded-md border-[#f99a00]">Join US</Link>
       </div>
     </div>
   );
