@@ -53,7 +53,7 @@ const Navbar = () => {
       </p>
 
       <NavLink className="w-11 relative" to={"/"}>
-        <img src="bg-[#001c54]" alt="" />
+        <img src="https://i.ibb.co/gMkPbpN/buy-1.png" alt="" />
         <p className=" bg-red-500 text-white  absolute top-[-8px] right-[-10px] rounded-full px-1">12</p>
       </NavLink>
     </>
