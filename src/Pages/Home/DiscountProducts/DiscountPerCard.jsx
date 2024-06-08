@@ -3,14 +3,10 @@ import CommonButton from "../../../Component/CommonButton";
 // eslint-disable-next-line react/prop-types
 const DiscountPerCard = ({product}) => {
     // eslint-disable-next-line react/prop-types
-    const {medicineName, genericName, medicineImage, massUnit, discountPercentage, perUnitPrice} = product;
-    const unit = massUnit;
-    const fixUnit = unit.split(' ')
-    const unitNum = parseInt(fixUnit[0])
-    const totalProductPrice = unitNum * perUnitPrice;
-    const discountedPrice = totalProductPrice / 100 * discountPercentage;
-    const afterDiscountPrice = totalProductPrice - discountedPrice;
-    console.log(afterDiscountPrice);
+    const {medicineName, genericName, medicineImage, discountPercentage, perUnitPrice} = product;
+    const discountedPrice = perUnitPrice / 100 * discountPercentage;
+    const afterDiscountPrice = perUnitPrice - discountedPrice;
+    const lastDiscounted = afterDiscountPrice.toFixed(2)
     return (
         <div className=" bg-orange-50 pt-12 pb-9 rounded-lg ">
             <div className="flex flex-col justify-center items-center">
@@ -26,8 +22,8 @@ const DiscountPerCard = ({product}) => {
                 </div>
                 <div className=" flex justify-between items-center w-full px-14 mt-6">
                 <div className=" flex  gap-3">
-                    <p className="  text-lg font-semibold line-through">${totalProductPrice}</p>
-                    <p className=" text-3xl font-medium text-custom-custom">${afterDiscountPrice}</p>
+                    <p className="  text-lg font-semibold line-through">${perUnitPrice}</p>
+                    <p className=" text-3xl font-medium text-custom-custom">${lastDiscounted}</p>
                 </div>
                 <CommonButton textSize={'text-base'} />
                 </div>
