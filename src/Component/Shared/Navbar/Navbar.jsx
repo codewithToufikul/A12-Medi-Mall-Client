@@ -45,10 +45,25 @@ const Navbar = () => {
               ? "pending"
               : " text-lg mr-6   font-bold"
           }
-          to="/contacts"
+          to="/shop"
         >
           {" "}
           SHOP
+        </NavLink>
+      </p>
+      <p>
+        <NavLink
+          className={({ isActive, isPending }) =>
+            isActive
+              ? " bg-[#f99a00] mr-6 text-white p-[6px] px-3 rounded-md  font-semibold text-lg "
+              : isPending
+              ? "pending"
+              : " text-lg mr-6   font-bold"
+          }
+          to="/shofp"
+        >
+          {" "}
+          CATEGORY
         </NavLink>
       </p>
 
