@@ -1,8 +1,16 @@
 import { Link, NavLink } from "react-router-dom";
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import navLogo from '../../../assets/navLogo.png';
+import useCart from "../../../Hooks/useCart";
+import { AuthContext } from "../../../AuthProvider/AuthProvider";
+import toast from "react-hot-toast";
 
 const Navbar = () => {
+  const {user, logoutUser} = useContext(AuthContext)
+  const [carts, refetch] = useCart();
+  useEffect(()=>{
+    refetch()
+  }, [refetch])
   useEffect(() => {
     const handleScroll = () => {
       const navbar = document.getElementById('navbar');
@@ -29,7 +37,7 @@ const Navbar = () => {
               ? "bg-[#f99a00] mr-6 text-white p-[6px] px-3 rounded-md  font-semibold text-lg"
               : isPending
               ? "pending"
-              : "text-lg mr-6   font-bold "
+              : "text-lg mr-6 font-bold"
           }
           to="/"
         >
@@ -60,19 +68,35 @@ const Navbar = () => {
               ? "pending"
               : " text-lg mr-6   font-bold"
           }
-          to="/shofp"
+          to="/categories/tablet"
         >
           {" "}
           CATEGORY
         </NavLink>
       </p>
 
-      <NavLink className="w-11 relative" to={"/"}>
+      <NavLink className={({ isActive, isPending }) =>
+            isActive
+              ? " w-11 relative bg-orange-100 p-1 rounded-full "
+              : isPending
+              ? "pending"
+              : " text-lg relative mr-6 w-11  font-bold"
+          } to={"/carts"}>
         <img src="https://i.ibb.co/gMkPbpN/buy-1.png" alt="" />
-        <p className=" bg-red-500 text-white  absolute top-[-8px] right-[-10px] rounded-full px-1">12</p>
+        <p className=" bg-red-500 text-white  absolute top-[-8px] right-[-10px] rounded-full px-1">{carts.length}</p>
       </NavLink>
     </>
   );
+
+  const handleLogout=()=>{
+    logoutUser()
+    .then(()=>{
+      toast.success('successfully logout !')
+    })
+    .catch(error=>{
+      toast.error(error.message)
+    })
+  }
 
   return (
     <div id="navbar" className="navbar sticky top-0 z-40 px-[180px] h-[80px] bg-base-100">
@@ -116,7 +140,22 @@ const Navbar = () => {
     <li><a>Item 2</a></li>
   </ul>
 </details>
-        <Link to="/login" className="= py-1 px-5 bg-transparent border-2 hover:bg-[#f99a00] hover:text-white text-2xl font-semibold text-[#f99a00] rounded-md border-[#f99a00]">Join US</Link>
+        {
+          user? <div className="dropdown dropdown-end">
+          <div tabIndex={0} role="button" className="">
+          <div className="avatar">
+  <div className="w-12 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+    <img src={user.photoURL} />
+  </div>
+</div>
+          </div>
+          <ul tabIndex={0} className="menu dropdown-content z-[1] p-2 shadow bg-base-100 rounded-box w-52 mt-4">
+            <li><a className=" text-lg">Update Profile</a></li> 
+            <li><a className=" text-lg">dashboard</a></li>
+            <li onClick={handleLogout}><a className=" text-lg">LogOut!</a></li>
+          </ul>
+        </div> : <Link to="/login" className="= py-1 px-5 bg-transparent border-2 hover:bg-[#f99a00] hover:text-white text-2xl font-semibold text-[#f99a00] rounded-md border-[#f99a00]">Join US</Link> 
+        }
       </div>
     </div>
   );

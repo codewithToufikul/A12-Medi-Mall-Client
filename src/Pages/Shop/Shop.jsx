@@ -13,12 +13,14 @@ import CommonButton from "../../Component/CommonButton";
 import usePublicAxios from "../../Hooks/usePublicAxios";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 import toast from "react-hot-toast";
+import useCart from "../../Hooks/useCart";
 
 const Shop = () => {
   const { user } = useContext(AuthContext);
   const [loading, setLoading] = useState(false);
-  console.log(user);
   const [products, isLoading] = useProducts();
+  const [carts, refetch] = useCart();
+  console.log(carts);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const axiosPublic = usePublicAxios();
 
@@ -53,6 +55,9 @@ const Shop = () => {
   };
 
   const handleAddCart = async (medicine) => {
+    if(!user){
+      return toast.error('login fast !')
+    }
     setLoading(true);
     const product = {
       medicineName: medicine.medicineName,
@@ -65,15 +70,17 @@ const Shop = () => {
       perUnitPrice: medicine.perUnitPrice,
       discountPercentage: medicine.discountPercentage,
       userEmail: user.email,
+      quantity: 1,
     };
     try {
       const res = await axiosPublic.post("/cart", product);
-      console.log(res.data);
       setLoading(false);
-      toast.success('successfully added!')
+      console.log(res.data);
+      toast.success('Successfully added!');
+      refetch();
     } catch (error) {
       setLoading(false);
-      toast.error(error.message)
+      toast.error(error.message);
     }
   };
 

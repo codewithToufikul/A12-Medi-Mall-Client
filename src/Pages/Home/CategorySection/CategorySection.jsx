@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import SectionHead from "../../../Component/SectionHead";
 import UseCategory from "../../../Hooks/UseCategory";
 
@@ -12,11 +13,11 @@ const CategorySection = () => {
                 </div>
                 <div className=" grid grid-cols-3 gap-5 mt-12">
                     {
-                        categories.map(category => <div className=" hover:shadow-lg w-[240px] py-12 bg-blue-50 space-y-2  flex flex-col justify-center items-center" key={category} >
+                        categories.map(category => <Link to={`/categories/${category.categoryName}`}  className=" hover:shadow-lg w-[240px] py-12 bg-blue-50 space-y-2  flex flex-col justify-center items-center" key={category} >
                             <img className=" mb-5 w-16" src={category.image} alt="" />
                             <h1 className=" text-2xl font-semibold">{category.categoryName}</h1>
                             <p className=" text-lg font-semibold"><span className=" text-custom-custom">{category.itemsCount}</span> Products !</p>
-                        </div>)
+                        </Link>)
                     }
                 </div>
             </div>
