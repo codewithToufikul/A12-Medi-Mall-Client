@@ -6,6 +6,7 @@ import Register from "../Register/Register";
 import Shop from "../Shop/Shop";
 import CategoryDetails from "../CategoryDetails/CategoryDetails";
 import ManageCart from "../MangeCart/ManageCart";
+import CheckoutPage from "../MangeCart/Payment/CheckOutPage";
 
  export const router = createBrowserRouter([
     {
@@ -35,7 +36,11 @@ import ManageCart from "../MangeCart/ManageCart";
         {
           path: "/carts",
           element: <ManageCart></ManageCart>
-        }
+        },
+        {
+          path: "/checkout",
+          element: <CheckoutPage></CheckoutPage>
+                }
       ]
     },
   ]);
