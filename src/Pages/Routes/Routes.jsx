@@ -7,6 +7,7 @@ import Shop from "../Shop/Shop";
 import CategoryDetails from "../CategoryDetails/CategoryDetails";
 import ManageCart from "../MangeCart/ManageCart";
 import CheckoutPage from "../MangeCart/Payment/CheckOutPage";
+import InvoicePage from "../InvoicePage/InvoicePage";
 
  export const router = createBrowserRouter([
     {
@@ -40,7 +41,11 @@ import CheckoutPage from "../MangeCart/Payment/CheckOutPage";
         {
           path: "/checkout",
           element: <CheckoutPage></CheckoutPage>
-                }
+         },
+         {
+          path: "/invoice",
+          element: <InvoicePage></InvoicePage>
+         }
       ]
     },
   ]);
