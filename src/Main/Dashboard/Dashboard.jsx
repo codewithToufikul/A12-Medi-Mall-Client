@@ -1,8 +1,8 @@
 import { AiFillHome, AiFillShopping } from "react-icons/ai";
-import { FaBook, FaList, FaUsers } from "react-icons/fa";
+import { FaList, FaUsers } from "react-icons/fa";
 import { GrContactInfo } from "react-icons/gr";
 import { IoHomeSharp, IoMenu } from "react-icons/io5";
-import { MdOutlinePayments, MdRestaurant } from "react-icons/md";
+import { MdOutlinePayments } from "react-icons/md";
 import { NavLink, Outlet } from "react-router-dom";
 import navLogo from '../../assets/navLogo.png';
 import { TbFileReport } from "react-icons/tb";
@@ -190,7 +190,7 @@ const Dashboard = () => {
     </>
   return (
     <div className=" flex w-full">
-      <div className=" px-8 bg-base-300 w-[280px] min-h-screen">
+      <div className=" px-8 bg-base-300 w-[300px] min-h-screen">
         <div className=" pt-8 pb-12 flex flex-col items-center font-cinzel">
          <img src={navLogo} alt="" />
         </div>

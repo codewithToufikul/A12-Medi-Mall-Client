@@ -1,11 +1,11 @@
-import React, { useContext } from 'react';
+/* eslint-disable react/prop-types */
+import { useContext } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { Page, Text, View, Document, StyleSheet, PDFDownloadLink, Image } from '@react-pdf/renderer';
-import navLogo from '../../assets/navLogo.png'; // Import your logo here
+import navLogo from '../../assets/navLogo.png';
 import { AuthContext } from '../../AuthProvider/AuthProvider';
 
-// Define styles
 const styles = StyleSheet.create({
   page: {
     padding: 30,
@@ -25,8 +25,8 @@ const styles = StyleSheet.create({
   },
   logo: {
     marginBottom: 20,
-    width: 200, // Adjust as per your logo size
-    height: 50, // Adjust as per your logo size
+    width: 200,
+    height: 50,
     alignSelf: 'center',
   },
   userInfo: {
@@ -46,6 +46,7 @@ const styles = StyleSheet.create({
 });
 
 // Create Document Component
+// eslint-disable-next-line react/prop-types
 const InvoiceDocument = ({ paymentIntent, logo, user }) => (
   <Document>
     <Page size="A4" style={styles.page}>

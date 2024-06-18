@@ -8,11 +8,13 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 import toast from "react-hot-toast";
 import { Helmet } from "react-helmet-async";
+import usePublicAxios from "../../Hooks/usePublicAxios";
 
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 
 const Register = () => {
+  const axiosPublic = usePublicAxios()
   const {
     register,
     handleSubmit,
@@ -22,10 +24,10 @@ const Register = () => {
   const [passError, setPassError] = useState("");
   const location = useLocation();
   const navigete = useNavigate();
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
 
   const onSubmit = async (data) => {
-    setLoading(true)
+    setLoading(true);
     if (data.password < 6) {
       setPassError("please provide more then 6 character password");
       return;
@@ -53,18 +55,29 @@ const Register = () => {
           if (result.user) {
             updateUser(data.name, image)
               .then(() => {
-                setLoading(false)
-                toast.success("Successfully Register !");
-                navigete(location?.state ? location.state : '/')
+                const userInfo = {
+                  name: data.name,
+                  email: data.email,
+                  role: data.role,
+                };
+                axiosPublic.post("/users", userInfo)
+                .then(res=>{
+                  if(res.data.insertedId){
+                    setLoading(false);
+                    toast.success('register successfully !')
+                    navigete(location?.state ? location.state : "/");
+                  }
+                })
+                navigete(location?.state ? location.state : "/");
               })
               .catch((error) => {
-                setLoading(false)
+                setLoading(false);
                 toast.error(error.message);
               });
           }
         })
         .catch((error) => {
-          setLoading(false)
+          setLoading(false);
           toast.error(error.message);
         });
     }
@@ -189,9 +202,11 @@ const Register = () => {
                 type="submit"
                 className="w-full py-2.5 px-4 text-sm font-semibold rounded-full text-white bg-custom-custom focus:outline-none"
               >
-               {
-                loading ? <span className="loading loading-spinner text-white"></span> : <p className=" text-lg">Sign Up</p>
-               }
+                {loading ? (
+                  <span className="loading loading-spinner text-white"></span>
+                ) : (
+                  <p className=" text-lg">Sign Up</p>
+                )}
               </button>
             </div>
 

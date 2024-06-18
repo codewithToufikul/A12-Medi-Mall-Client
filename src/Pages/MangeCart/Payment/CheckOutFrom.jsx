@@ -1,11 +1,14 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../../AuthProvider/AuthProvider";
 
 // eslint-disable-next-line react/prop-types
 const CheckoutForm = ({ totalAmount }) => {
+  const { user } = useContext(AuthContext);
+  const userEmail = user.email;
   const stripe = useStripe();
   const elements = useElements();
   const navigate = useNavigate();
@@ -22,6 +25,7 @@ const CheckoutForm = ({ totalAmount }) => {
         data: { clientSecret },
       } = await axios.post("http://localhost:5000/create-payment-intent", {
         amount: totalAmount,
+        email: userEmail,  // Include user email
       });
 
       const payload = await stripe.confirmCardPayment(clientSecret, {
@@ -38,6 +42,14 @@ const CheckoutForm = ({ totalAmount }) => {
         setProcessing(false);
         setSucceeded(true);
         console.log("Payment succeeded:", payload.paymentIntent);
+
+        // Save payment details in the database
+        await axios.post("http://localhost:5000/save-payment-details", {
+          paymentIntent: payload.paymentIntent,
+          userEmail: userEmail,
+          status: 'pending'
+        });
+
         Swal.fire({
           position: "center",
           icon: "success",
@@ -58,12 +70,12 @@ const CheckoutForm = ({ totalAmount }) => {
   return (
     <form onSubmit={handleSubmit}>
       <CardElement />
-      <div className=" flex justify-center mt-5 ">
-      <button className=" mt-8  btn text-lg bg-custom-custom text-white" disabled={processing || succeeded} type="submit">
-        {processing ? "Processing..." : "Pay Now"}
-      </button>
+      <div className="flex justify-center mt-5">
+        <button className="mt-8 btn text-lg bg-custom-custom text-white" disabled={processing || succeeded} type="submit">
+          {processing ? "Processing..." : "Pay Now"}
+        </button>
       </div>
-      {error && <div>{error}</div>}
+      {error && <div className=" text-red-400">{error}</div>}
     </form>
   );
 };
