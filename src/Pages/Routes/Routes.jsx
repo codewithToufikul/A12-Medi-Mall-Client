@@ -10,6 +10,7 @@ import CheckoutPage from "../MangeCart/Payment/CheckOutPage";
 import InvoicePage from "../InvoicePage/InvoicePage";
 import Dashboard from "../../Main/Dashboard/Dashboard";
 import TotalSale from "../DashboardPages/Pages/TotalSale/TotalSale";
+import ManageUser from "../DashboardPages/Pages/ManageUser/ManageUser";
 
  export const router = createBrowserRouter([
     {
@@ -55,8 +56,12 @@ import TotalSale from "../DashboardPages/Pages/TotalSale/TotalSale";
       element: <Dashboard></Dashboard>,
       children:[
         {
-          path: "/dashboard",
+          path: "home",
           element: <TotalSale></TotalSale>
+        },
+        {
+          path: "manage-user",
+          element: <ManageUser></ManageUser>
         }
       ]
     }

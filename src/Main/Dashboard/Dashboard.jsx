@@ -20,7 +20,7 @@ const Dashboard = () => {
               ? "pending"
               : "text-base font-inter"
           }
-          to="/dashboard"
+          to="home"
         >
            <div className=" flex items-center gap-2">
            <p className=" text-xl"><IoHomeSharp size={25}/></p>
@@ -37,7 +37,7 @@ const Dashboard = () => {
               ? "pending"
               : "text-base font-inter"
           }
-          to="/dashboar"
+          to="manage-user"
         >
            <div className=" flex items-center gap-2">
            <p ><FaUsers size={25} /></p>

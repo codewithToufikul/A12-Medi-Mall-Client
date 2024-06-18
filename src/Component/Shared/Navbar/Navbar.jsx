@@ -151,7 +151,7 @@ const Navbar = () => {
           </div>
           <ul tabIndex={0} className="menu dropdown-content z-[1] p-2 shadow bg-base-100 rounded-box w-52 mt-4">
             <li><a className=" text-lg">Update Profile</a></li> 
-            <li className=" text-lg"><Link to={"/dashboard"}>dashboard</Link></li>
+            <li className=" text-lg"><Link to={"/dashboard/home"}>dashboard</Link></li>
             <li onClick={handleLogout}><a className=" text-lg">LogOut!</a></li>
           </ul>
         </div> : <Link to="/login" className="= py-1 px-5 bg-transparent border-2 hover:bg-[#f99a00] hover:text-white text-2xl font-semibold text-[#f99a00] rounded-md border-[#f99a00]">Join US</Link> 
