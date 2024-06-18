@@ -1,10 +1,11 @@
 import React, { useContext } from 'react';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { Page, Text, View, Document, StyleSheet, PDFDownloadLink, Image } from '@react-pdf/renderer';
-import navLogo from '../../assets/navLogo.png';
+import navLogo from '../../assets/navLogo.png'; // Import your logo here
 import { AuthContext } from '../../AuthProvider/AuthProvider';
 
+// Define styles
 const styles = StyleSheet.create({
   page: {
     padding: 30,
@@ -24,8 +25,8 @@ const styles = StyleSheet.create({
   },
   logo: {
     marginBottom: 20,
-    width: 200,
-    height: 50,
+    width: 200, // Adjust as per your logo size
+    height: 50, // Adjust as per your logo size
     alignSelf: 'center',
   },
   userInfo: {
@@ -44,6 +45,7 @@ const styles = StyleSheet.create({
   },
 });
 
+// Create Document Component
 const InvoiceDocument = ({ paymentIntent, logo, user }) => (
   <Document>
     <Page size="A4" style={styles.page}>
@@ -73,13 +75,20 @@ const InvoicePage = () => {
   const { user } = useContext(AuthContext);
   const location = useLocation();
   const { paymentIntent } = location.state || {};
+  
+  if (!user) {
+    return <div className=' min-h-screen flex justify-center items-center'>
+        <span className="loading loading-bars loading-lg"></span>
+    </div>;
+  }
+
 
   if (!paymentIntent) {
     return <div>No payment information found.</div>;
   }
 
   return (
-    <div className="max-w-4xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+    <div className="max-w-4xl mt-6 mx-auto py-12 px-4 sm:px-6 lg:px-8">
       <Helmet>
         <title>Invoice</title>
       </Helmet>
@@ -111,11 +120,11 @@ const InvoicePage = () => {
           fileName={`invoice_${paymentIntent.id}.pdf`}
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
         >
-          {({ loading, }) =>
-            loading ? 'Generating PDF...' : 'Download Invoice'
-          }
+          Download Invoice
         </PDFDownloadLink>
+        
       </div>
+      <Link className='underline' to={"/"} >Go Home</Link>
     </div>
   );
 };

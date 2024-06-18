@@ -8,6 +8,8 @@ import CategoryDetails from "../CategoryDetails/CategoryDetails";
 import ManageCart from "../MangeCart/ManageCart";
 import CheckoutPage from "../MangeCart/Payment/CheckOutPage";
 import InvoicePage from "../InvoicePage/InvoicePage";
+import Dashboard from "../../Main/Dashboard/Dashboard";
+import TotalSale from "../DashboardPages/Pages/TotalSale/TotalSale";
 
  export const router = createBrowserRouter([
     {
@@ -48,4 +50,14 @@ import InvoicePage from "../InvoicePage/InvoicePage";
          }
       ]
     },
+    {
+      path:"/dashboard",
+      element: <Dashboard></Dashboard>,
+      children:[
+        {
+          path: "/dashboard",
+          element: <TotalSale></TotalSale>
+        }
+      ]
+    }
   ]);
