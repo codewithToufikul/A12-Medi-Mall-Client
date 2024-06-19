@@ -54,7 +54,7 @@ const Dashboard = () => {
               ? "pending"
               : "text-base font-inter"
           }
-          to="/dashboar"
+          to="manage-category"
         >
            <div className=" flex items-center gap-2">
            <p ><FaList size={23} /></p>
@@ -71,7 +71,7 @@ const Dashboard = () => {
               ? "pending"
               : "text-base font-inter"
           }
-          to="/dashard"
+          to="manage-payments"
         >
            <div className=" flex items-center gap-2">
            <p ><MdOutlinePayments size={25} /></p>
@@ -190,7 +190,7 @@ const Dashboard = () => {
     </>
   return (
     <div className=" flex w-full">
-      <div className=" px-8 bg-base-300 w-[300px] min-h-screen">
+      <div className=" sticky z-40 left-0 top-0 px-8 bg-base-300 w-[300px] h-screen">
         <div className=" pt-8 pb-12 flex flex-col items-center font-cinzel">
          <img src={navLogo} alt="" />
         </div>
