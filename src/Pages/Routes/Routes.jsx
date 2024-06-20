@@ -14,6 +14,10 @@ import ManageUser from "../DashboardPages/Pages/ManageUser/ManageUser";
 import ManageCategory from "../DashboardPages/Pages/ManageCategory/ManageCategory";
 import ManagePayments from "../DashboardPages/Pages/ManagePayments/ManagePayments";
 import ManageAdvice from "../DashboardPages/Pages/ManageAdvice/ManageAdvice";
+import UserHome from "../DashboardPages/UserHome/UserHome"
+import UserPaymentHistiry from "../DashboardPages/Pages/UserPaymentHistiry/UserPaymentHistiry";
+import AdminRoute from "./AdminRoute/AdminRoute";
+import ManageMedicine from "../DashboardPages/Pages/ManageMedicine/ManageMedicine";
 
  export const router = createBrowserRouter([
     {
@@ -58,25 +62,40 @@ import ManageAdvice from "../DashboardPages/Pages/ManageAdvice/ManageAdvice";
       path:"/dashboard",
       element: <Dashboard></Dashboard>,
       children:[
+        // admin route
         {
           path: "home",
-          element: <TotalSale></TotalSale>
+          element: <AdminRoute><TotalSale></TotalSale></AdminRoute>
         },
         {
           path: "manage-user",
-          element: <ManageUser></ManageUser>
+          element:<AdminRoute> <ManageUser></ManageUser></AdminRoute>
         },
         {
           path: "manage-category",
-          element: <ManageCategory></ManageCategory>
+          element: <AdminRoute><ManageCategory></ManageCategory></AdminRoute>
         },
         {
           path: "manage-payments",
-          element: <ManagePayments></ManagePayments>
+          element: <AdminRoute><ManagePayments></ManagePayments></AdminRoute>
         },
         {
           path: "manage-advice",
-          element: <ManageAdvice></ManageAdvice>
+          element: <AdminRoute><ManageAdvice></ManageAdvice></AdminRoute>
+        },
+        // user route
+        {
+          path: "user-home",
+          element: <UserHome></UserHome>
+        },
+        {
+          path: "payment-history",
+          element: <UserPaymentHistiry></UserPaymentHistiry>
+        },
+        // seller route
+        {
+          path: "manage-medicine",
+          element: <ManageMedicine></ManageMedicine>
         }
       ]
     }

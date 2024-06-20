@@ -25,7 +25,7 @@ const CheckoutForm = ({ totalAmount }) => {
         data: { clientSecret },
       } = await axios.post("http://localhost:5000/create-payment-intent", {
         amount: totalAmount,
-        email: userEmail,  // Include user email
+        email: userEmail,
       });
 
       const payload = await stripe.confirmCardPayment(clientSecret, {
@@ -43,11 +43,15 @@ const CheckoutForm = ({ totalAmount }) => {
         setSucceeded(true);
         console.log("Payment succeeded:", payload.paymentIntent);
 
+        // Capture the current date
+        const currentDate = new Date().toISOString();
+
         // Save payment details in the database
         await axios.post("http://localhost:5000/save-payment-details", {
           paymentIntent: payload.paymentIntent,
           userEmail: userEmail,
-          status: 'pending'
+          status: 'pending',
+          date: currentDate, // Add the current date here
         });
 
         Swal.fire({

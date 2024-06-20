@@ -4,10 +4,15 @@ import navLogo from '../../../assets/navLogo.png';
 import useCart from "../../../Hooks/useCart";
 import { AuthContext } from "../../../AuthProvider/AuthProvider";
 import toast from "react-hot-toast";
+import useAdmin from "../../../Hooks/useAdmin";
+import useSeller from "../../../Hooks/useSeller";
 
 const Navbar = () => {
   const {user, logoutUser} = useContext(AuthContext)
   const [carts, refetch] = useCart();
+  const [isAdmin] = useAdmin()
+  const [isSeller] = useSeller()
+  console.log('seller',isSeller);
   useEffect(()=>{
     refetch()
   }, [refetch])
@@ -151,7 +156,7 @@ const Navbar = () => {
           </div>
           <ul tabIndex={0} className="menu dropdown-content z-[1] p-2 shadow bg-base-100 rounded-box w-52 mt-4">
             <li><a className=" text-lg">Update Profile</a></li> 
-            <li className=" text-lg"><Link to={"/dashboard/home"}>dashboard</Link></li>
+            <li className=" text-lg"><Link to={isAdmin ? '/dashboard/home' : '/dashboard/user-home'}>dashboard</Link></li>
             <li onClick={handleLogout}><a className=" text-lg">LogOut!</a></li>
           </ul>
         </div> : <Link to="/login" className="= py-1 px-5 bg-transparent border-2 hover:bg-[#f99a00] hover:text-white text-2xl font-semibold text-[#f99a00] rounded-md border-[#f99a00]">Join US</Link> 
