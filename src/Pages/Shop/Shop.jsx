@@ -6,7 +6,6 @@ import { FiEye } from "react-icons/fi";
 import "react-tooltip/dist/react-tooltip.css";
 import { Tooltip } from "react-tooltip";
 import { FaArrowUp91 } from "react-icons/fa6";
-import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import { useContext, useState } from "react";
 import CommonButton from "../../Component/CommonButton";
@@ -18,36 +17,12 @@ import useCart from "../../Hooks/useCart";
 const Shop = () => {
   const { user } = useContext(AuthContext);
   const [loading, setLoading] = useState(false);
-  const [products, isLoading] = useProducts();
+  const [products] = useProducts();
   const [carts, refetch] = useCart();
   console.log(carts);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const axiosPublic = usePublicAxios();
 
-  const renderSkeletons = () =>
-    Array.from({ length: 10 }).map((_, index) => (
-      <tr key={index} className="hover">
-        <th className="">
-          <Skeleton width={20} />
-        </th>
-        <td className="text-lg">
-          <Skeleton width={150} />
-        </td>
-        <td className="text-base">
-          <Skeleton width={100} />
-        </td>
-        <td className="text-base">
-          <Skeleton width={100} />
-        </td>
-        <td className="text-base font-semibold">
-          <Skeleton width={50} />
-        </td>
-        <td className="flex justify-center items-center gap-5 text-base font-semibold">
-          <Skeleton width={30} height={30} circle={true} />
-          <Skeleton width={30} height={30} circle={true} />
-        </td>
-      </tr>
-    ));
 
   const handleViewProduct = (product) => {
     setSelectedProduct(product);
@@ -70,6 +45,7 @@ const Shop = () => {
       perUnitPrice: medicine.perUnitPrice,
       discountPercentage: medicine.discountPercentage,
       userEmail: user.email,
+      sellerEmail: medicine.sellerEmail,
       quantity: 1,
     };
     try {
@@ -128,25 +104,7 @@ const Shop = () => {
           </div>
         </div>
         <div className="col-span-3">
-          {isLoading ? (
-            <div className="flex justify-center">
-              <div className="w-full overflow-x-auto mt-3">
-                <table className="table">
-                  <thead>
-                    <tr>
-                      <th></th>
-                      <th className="text-lg">Name</th>
-                      <th className="text-lg">Category</th>
-                      <th className="text-lg">Company</th>
-                      <th className="text-lg">Unit Price</th>
-                      <th className="text-lg text-center">Action</th>
-                    </tr>
-                  </thead>
-                  <tbody>{renderSkeletons()}</tbody>
-                </table>
-              </div>
-            </div>
-          ) : (
+    
             <>
               <div className="flex justify-end mt-[-40px]">
                 <div className="dropdown dropdown-bottom dropdown-end">
@@ -224,7 +182,6 @@ const Shop = () => {
                 </div>
               </div>
             </>
-          )}
         </div>
       </div>
       <Tooltip id="my-tooltip" />

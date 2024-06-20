@@ -1,0 +1,51 @@
+import { useContext } from "react";
+import { AuthContext } from "../../../../AuthProvider/AuthProvider";
+import usePaymentDetails from "../../../../Hooks/usePaymentDetails";
+
+const SellerHome = () => {
+  const { user } = useContext(AuthContext);
+  const [payments] = usePaymentDetails();
+  // console.log(payments);
+  const userPayments = payments.filter(
+    (paymentData) =>
+      paymentData.sellerEmail && paymentData.sellerEmail.includes(user.email)
+  );
+  // Filter paid payments
+  const paidUserPayments = userPayments.filter(
+    (paymentData) => paymentData.status === "paid"
+  );
+
+  // Filter pending payments
+  const pendingUserPayments = userPayments.filter(
+    (paymentData) => paymentData.status === "pending"
+  );
+  const totalPaidPrice = paidUserPayments.reduce(
+    (total, paymentData) => total + parseFloat(paymentData.amount / 100),
+    0
+  );
+
+ const totalPendingPrice = pendingUserPayments.reduce(
+    (total, paymentData) => total + parseFloat(paymentData.amount / 100),
+    0
+  );
+
+  return (
+    <div>
+      <div className="text-center py-14">
+        <h1 className="text-5xl">WellCome Seller: {user.displayName}</h1>
+      </div>
+     <div className=" flex justify-center items-center gap-7 mt-10">
+        <div className=" bg-green-200 p-12 text-center space-y-2">
+            <h1 className=" text-3xl">PAID TOTAL:</h1>
+            <h2 className="text-3xl">${totalPaidPrice}</h2>
+        </div>
+        <div className=" bg-red-200 p-12 text-center space-y-2">
+            <h1 className=" text-3xl">PENDING TOTAL:</h1>
+            <h1 className=" text-3xl">${totalPendingPrice}</h1>
+        </div>
+     </div>
+    </div>
+  );
+};
+
+export default SellerHome;

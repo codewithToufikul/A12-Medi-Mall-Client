@@ -134,7 +134,7 @@ const Dashboard = () => {
               ? "text-custom-custom font-bold font-inter text-base"
               : "text-base font-inter"
           }
-          to="home"
+          to="seller-home"
         >
           <div className="flex items-center gap-2">
             <p className="text-xl">

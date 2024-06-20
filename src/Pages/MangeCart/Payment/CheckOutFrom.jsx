@@ -1,20 +1,29 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../AuthProvider/AuthProvider";
+import useCart from "../../../Hooks/useCart";
 
 // eslint-disable-next-line react/prop-types
 const CheckoutForm = ({ totalAmount }) => {
-  const { user } = useContext(AuthContext);
-  const userEmail = user.email;
+  const { user, loading } = useContext(AuthContext);
   const stripe = useStripe();
   const elements = useElements();
   const navigate = useNavigate();
   const [error, setError] = useState(null);
   const [processing, setProcessing] = useState(false);
   const [succeeded, setSucceeded] = useState(false);
+  const [carts] = useCart()
+
+  useEffect(() => {
+    if (!user && !loading) {
+      navigate("/login");
+    }
+  }, [user, loading, navigate]);
+
+  
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -25,7 +34,7 @@ const CheckoutForm = ({ totalAmount }) => {
         data: { clientSecret },
       } = await axios.post("http://localhost:5000/create-payment-intent", {
         amount: totalAmount,
-        email: userEmail,
+        email: user.email,
       });
 
       const payload = await stripe.confirmCardPayment(clientSecret, {
@@ -43,15 +52,15 @@ const CheckoutForm = ({ totalAmount }) => {
         setSucceeded(true);
         console.log("Payment succeeded:", payload.paymentIntent);
 
-        // Capture the current date
         const currentDate = new Date().toISOString();
 
-        // Save payment details in the database
         await axios.post("http://localhost:5000/save-payment-details", {
           paymentIntent: payload.paymentIntent,
-          userEmail: userEmail,
+          userEmail: user.email,
           status: 'pending',
-          date: currentDate, // Add the current date here
+          date: currentDate,
+          sellerEmail: carts.map(item => item.sellerEmail),
+          items: carts.map(item=> item),
         });
 
         Swal.fire({
@@ -70,6 +79,10 @@ const CheckoutForm = ({ totalAmount }) => {
       setProcessing(false);
     }
   };
+
+  if (!user) {
+    return <p>Loadng...</p>;
+  }
 
   return (
     <form onSubmit={handleSubmit}>

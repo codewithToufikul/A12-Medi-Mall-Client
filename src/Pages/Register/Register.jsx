@@ -29,14 +29,17 @@ const Register = () => {
   const onSubmit = async (data) => {
     setLoading(true);
     if (data.password < 6) {
+      setLoading(false)
       setPassError("please provide more then 6 character password");
       return;
     }
     if (!/[A-Z]/.test(data.password)) {
+      setLoading(false)
       setPassError("please must contain at least one uppercase letter");
       return;
     }
     if (!/[a-z]/.test(data.password)) {
+      setLoading(false)
       setPassError("please must contain at least one lowercase letter");
       return;
     }
