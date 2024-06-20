@@ -1,12 +1,17 @@
 import { useQuery } from "@tanstack/react-query";
+import useAxiosSecure from "./useAxiosSecure";
 
 
 const UseAdvice = () => {
-    const {data: advices=[]} = useQuery({
+    const axiosSecure = useAxiosSecure()
+    const {data: advices=[], refetch} = useQuery({
         queryKey: ["advices"],
-        queryFn:  ()=> fetch('/advice.json').then(res=> res.json())
+        queryFn:  async()=> {
+            const res = await axiosSecure.get("/advice")
+            return res.data
+        }
     })
-    return [advices]
+    return [advices, refetch]
 };
 
 export default UseAdvice;

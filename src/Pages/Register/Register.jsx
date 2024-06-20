@@ -1,20 +1,20 @@
 import axios from "axios";
 import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
-import { FaGithub, FaRegEye } from "react-icons/fa";
-import { FcGoogle } from "react-icons/fc";
+import {  FaRegEye } from "react-icons/fa";
 import { IoMailOutline } from "react-icons/io5";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 import toast from "react-hot-toast";
 import { Helmet } from "react-helmet-async";
 import usePublicAxios from "../../Hooks/usePublicAxios";
+import SocialLogin from "../../Component/SosialLogin/SocialLogin";
 
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 
 const Register = () => {
-  const axiosPublic = usePublicAxios()
+  const axiosPublic = usePublicAxios();
   const {
     register,
     handleSubmit,
@@ -60,14 +60,13 @@ const Register = () => {
                   email: data.email,
                   role: data.role,
                 };
-                axiosPublic.post("/users", userInfo)
-                .then(res=>{
-                  if(res.data.insertedId){
+                axiosPublic.post("/users", userInfo).then((res) => {
+                  if (res.data.insertedId) {
                     setLoading(false);
-                    toast.success('register successfully !')
+                    toast.success("register successfully !");
                     navigete(location?.state ? location.state : "/");
                   }
-                })
+                });
                 navigete(location?.state ? location.state : "/");
               })
               .catch((error) => {
@@ -214,19 +213,7 @@ const Register = () => {
               or continue with
             </p>
 
-            <div className="space-x-8 flex items-center justify-center">
-              <FcGoogle className="text-4xl" />
-              <FaGithub className="text-4xl" />
-              <button
-                type="button"
-                className="border-none w-[38px] outline-none"
-              >
-                <img
-                  src="https://i.ibb.co/nQxZ8Xy/communication-1.png"
-                  alt=""
-                />
-              </button>
-            </div>
+            <SocialLogin></SocialLogin>
           </form>
         </div>
       </div>

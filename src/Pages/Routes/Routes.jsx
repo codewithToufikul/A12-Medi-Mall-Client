@@ -13,6 +13,7 @@ import TotalSale from "../DashboardPages/Pages/TotalSale/TotalSale";
 import ManageUser from "../DashboardPages/Pages/ManageUser/ManageUser";
 import ManageCategory from "../DashboardPages/Pages/ManageCategory/ManageCategory";
 import ManagePayments from "../DashboardPages/Pages/ManagePayments/ManagePayments";
+import ManageAdvice from "../DashboardPages/Pages/ManageAdvice/ManageAdvice";
 
  export const router = createBrowserRouter([
     {
@@ -72,6 +73,10 @@ import ManagePayments from "../DashboardPages/Pages/ManagePayments/ManagePayment
         {
           path: "manage-payments",
           element: <ManagePayments></ManagePayments>
+        },
+        {
+          path: "manage-advice",
+          element: <ManageAdvice></ManageAdvice>
         }
       ]
     }
