@@ -168,13 +168,30 @@ const Dashboard = () => {
               ? "text-custom-custom font-bold font-inter text-base"
               : "text-base font-inter"
           }
-          to="manage-orders"
+          to="payments-history"
         >
           <div className="flex items-center gap-2">
             <p>
               <MdOutlinePayments size={25} />
             </p>
-            <p>MANAGE ORDERS</p>
+            <p>PAYMENTS HISTORY</p>
+          </div>
+        </NavLink>
+      </li>
+      <li>
+        <NavLink
+          className={({ isActive }) =>
+            isActive
+              ? "text-custom-custom font-bold font-inter text-base"
+              : "text-base font-inter"
+          }
+          to="payments-history"
+        >
+          <div className="flex items-center gap-2">
+            <p>
+              <MdOutlinePayments size={25} />
+            </p>
+            <p>PAYMENTS HISTORY</p>
           </div>
         </NavLink>
       </li>

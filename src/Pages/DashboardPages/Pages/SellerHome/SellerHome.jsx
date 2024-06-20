@@ -5,17 +5,14 @@ import usePaymentDetails from "../../../../Hooks/usePaymentDetails";
 const SellerHome = () => {
   const { user } = useContext(AuthContext);
   const [payments] = usePaymentDetails();
-  // console.log(payments);
   const userPayments = payments.filter(
     (paymentData) =>
       paymentData.sellerEmail && paymentData.sellerEmail.includes(user.email)
   );
-  // Filter paid payments
   const paidUserPayments = userPayments.filter(
     (paymentData) => paymentData.status === "paid"
   );
 
-  // Filter pending payments
   const pendingUserPayments = userPayments.filter(
     (paymentData) => paymentData.status === "pending"
   );

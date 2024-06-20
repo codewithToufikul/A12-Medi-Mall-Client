@@ -19,6 +19,7 @@ import UserPaymentHistiry from "../DashboardPages/Pages/UserPaymentHistiry/UserP
 import AdminRoute from "./AdminRoute/AdminRoute";
 import ManageMedicine from "../DashboardPages/Pages/ManageMedicine/ManageMedicine";
 import SellerHome from "../DashboardPages/Pages/SellerHome/SellerHome";
+import PaymentsHistory from "../DashboardPages/Pages/PaymentsHistory/PaymentsHistory";
 
 export const router = createBrowserRouter([
   {
@@ -123,6 +124,10 @@ export const router = createBrowserRouter([
         path: "seller-home",
         element: <SellerHome></SellerHome>,
       },
+      {
+        path: "payments-history",
+        element: <PaymentsHistory></PaymentsHistory>
+      }
     ],
   },
 ]);
