@@ -5,6 +5,7 @@ import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 import toast from "react-hot-toast";
 import useProducts from "../../../../Hooks/useProducts";
 import { useForm } from "react-hook-form";
+import { Helmet } from "react-helmet-async";
 
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
@@ -115,8 +116,11 @@ const ManageCategory = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <div className="text-center py-14">
-        <h1 className="text-5xl">Manage All Categories</h1>
+      <Helmet>
+        <title>Manage Category</title>
+      </Helmet>
+      <div className="text-center py-7 lg:py-14">
+        <h1 className=" text-3xl lg:text-5xl">Manage All Categories</h1>
       </div>
       <div className="mx-auto p-8 max-w-[1200px] mt-10 bg-white">
        <div className=" flex justify-center">
@@ -179,17 +183,17 @@ const ManageCategory = () => {
           <table className="table">
             <thead>
               <tr className="bg-custom-custom text-white">
-                <th></th>
-                <th className="text-xl">Name</th>
-                <th className="text-xl">Category</th>
-                <th className="text-xl">Per Unit Price</th>
-                <th className="text-center text-xl">Actions</th>
+                <th className=" md:block hidden"></th>
+                <th className="lg:text-xl">Name</th>
+                <th className="lg:text-xl">Category</th>
+                <th className="lg:text-xl">Per Unit Price</th>
+                <th className="text-center lg:text-xl">Actions</th>
               </tr>
             </thead>
             <tbody>
               {products.map((product) => (
                 <tr key={product._id}>
-                  <th>
+                  <th className=" md:block hidden">
                     <img
                       src={product.medicineImage}
                       alt={product.medicineName}
@@ -197,14 +201,14 @@ const ManageCategory = () => {
                     />
                   </th>
                   <td>
-                    <h1 className="text-lg uppercase">
+                    <h1 className="lg:text-lg uppercase">
                       {product.medicineName}
                     </h1>
                   </td>
                   <td>
-                    <h1 className=" text-base">{product.category}</h1>
+                    <h1 className=" lg:text-base">{product.category}</h1>
                   </td>
-                  <td className=" text-lg">${product.perUnitPrice}</td>
+                  <td className=" lg:text-lg">${product.perUnitPrice}</td>
                   <td className="flex justify-center space-x-4">
                     <button
                       onClick={() => handleEdit(product)}

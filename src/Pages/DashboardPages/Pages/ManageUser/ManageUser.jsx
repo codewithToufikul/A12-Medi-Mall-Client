@@ -1,6 +1,7 @@
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 import useUsersLoad from "../../../../Hooks/useUsersLoad";
+import { Helmet } from "react-helmet-async";
 
 const ManageUser = () => {
   const [users, refetch ] = useUsersLoad();
@@ -40,45 +41,50 @@ const ManageUser = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <div className="text-center py-14">
-        <h1 className="text-5xl">Manage All Users</h1>
+      <Helmet>
+        <title>
+          Manage User
+        </title>
+      </Helmet>
+      <div className="text-center py-7 lg:py-14">
+        <h1 className=" text-3xl lg:text-5xl">Manage All Users</h1>
       </div>
       <div className="mx-auto p-8 max-w-[1200px] mt-16 bg-white">
-        <h1 className="text-3xl mb-6">{`Total Users: ${users.length}`}</h1>
+        <h1 className=" text-xl lg:text-3xl mb-6">{`Total Users: ${users.length}`}</h1>
         <div className="overflow-x-auto">
           <table className="table">
             <thead>
               <tr className="bg-custom-custom text-white">
-                <th className="text-xl">Name</th>
-                <th className="text-xl">Email</th>
-                <th className="text-xl">Role</th>
-                <th className="text-center text-xl">Action</th>
+                <th className="text-base lg:text-xl">Name</th>
+                <th className="text-base lg:text-xl">Email</th>
+                <th className="text-base lg:text-xl">Role</th>
+                <th className="text-center text-base lg:text-xl">Action</th>
               </tr>
             </thead>
             <tbody>
               {users.map((user) => (
                 <tr key={user._id}>
                   <td>
-                    <h1 className="text-lg">{user.name}</h1>
+                    <h1 className="text-sm lg:text-lg">{user.name}</h1>
                   </td>
                   <td>
-                    <h2 className="text-lg">{user.email}</h2>
+                    <h2 className="text-sm lg:text-lg">{user.email}</h2>
                   </td>
                   <td>
-                    <h2 className="text-lg">{user.role}</h2>
+                    <h2 className="text-sm lg:text-lg">{user.role}</h2>
                   </td>
                   <td className="flex justify-center space-x-4">
                     {user.role === "user" && (
                       <>
                         <button
                           onClick={() => handleRoleChange(user, "admin")}
-                          className="btn px-4 py-2 bg-emerald-300 text-white hover:bg-emerald-400"
+                          className="btn lg:px-4 lg:py-2 bg-emerald-300 text-white hover:bg-emerald-400"
                         >
                           Make Admin
                         </button>
                         <button
                           onClick={() => handleRoleChange(user, "seller")}
-                          className="btn px-4 py-2 bg-orange-300 text-white hover:bg-orange-400"
+                          className="btn lg:px-4 lg:py-2 bg-orange-300 text-white hover:bg-orange-400"
                         >
                           Make Seller
                         </button>

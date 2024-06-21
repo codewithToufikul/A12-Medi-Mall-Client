@@ -87,6 +87,7 @@ const CheckoutForm = ({ totalAmount }) => {
 
   return (
     <form onSubmit={handleSubmit}>
+      
       <CardElement />
       <div className="flex justify-center mt-5">
         <button className="mt-8 btn text-lg bg-custom-custom text-white" disabled={processing || succeeded} type="submit">

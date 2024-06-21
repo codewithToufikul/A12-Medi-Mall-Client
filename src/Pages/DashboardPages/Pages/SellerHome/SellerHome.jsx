@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { AuthContext } from "../../../../AuthProvider/AuthProvider";
 import usePaymentDetails from "../../../../Hooks/usePaymentDetails";
+import { Helmet } from "react-helmet-async";
 
 const SellerHome = () => {
   const { user } = useContext(AuthContext);
@@ -28,10 +29,12 @@ const SellerHome = () => {
 
   return (
     <div>
+        <Helmet><title>Seller || Home</title></Helmet>
       <div className="text-center py-14">
-        <h1 className="text-5xl">WellCome Seller: {user.displayName}</h1>
+
+        <h1 className=" text-3xl lg:text-5xl">WellCome Seller: {user.displayName}</h1>
       </div>
-     <div className=" flex justify-center items-center gap-7 mt-10">
+     <div className=" flex lg:flex-row flex-col justify-center items-center gap-7 mt-10">
         <div className=" bg-green-200 p-12 text-center space-y-2">
             <h1 className=" text-3xl">PAID TOTAL:</h1>
             <h2 className="text-3xl">${totalPaidPrice}</h2>

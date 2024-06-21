@@ -91,7 +91,7 @@ const Navbar = () => {
   };
 
   return (
-    <div id="navbar" className="navbar sticky top-0 z-40 px-[180px] h-[80px] bg-base-100">
+    <div id="navbar" className="navbar sticky top-0 z-40 lg:px-[180px] h-[80px] bg-base-100">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -112,7 +112,7 @@ const Navbar = () => {
           </div>
           <ul
             tabIndex={0}
-            className="menu  menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+            className="menu space-y-5  menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
           >
             {navLink}
           </ul>
@@ -125,7 +125,7 @@ const Navbar = () => {
         </ul>
       </div>
       <div className="navbar-end">
-        <details className="dropdown mr-10">
+        <details className="dropdown mr-10 lg:block hidden">
           <summary className="m-1 text-lg underline font-semibold cursor-pointer">Language</summary>
           <ul className="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box">
             <li><a>Item 1</a></li>
@@ -155,7 +155,7 @@ const Navbar = () => {
               </ul>
             </div>
           ) : (
-            <Link to="/login" className="= py-1 px-5 bg-transparent border-2 hover:bg-[#f99a00] hover:text-white text-2xl font-semibold text-[#f99a00] rounded-md border-[#f99a00]">
+            <Link to="/login" className="= py-1 md:px-5 bg-transparent border-2 hover:bg-[#f99a00] hover:text-white text-lg px-3 md:text-2xl font-semibold text-[#f99a00] rounded-md border-[#f99a00]">
               Join US
             </Link>
           )

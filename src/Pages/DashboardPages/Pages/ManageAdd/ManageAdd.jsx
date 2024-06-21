@@ -5,6 +5,7 @@ import { IoMdAddCircleOutline } from "react-icons/io";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
+import { Helmet } from "react-helmet-async";
 
 const imageHostingKey = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const imageHostingAPI = `https://api.imgbb.com/1/upload?key=${imageHostingKey}`;
@@ -67,13 +68,14 @@ const ManageAdd = () => {
 
   return (
     <div className="bg-gray-50 min-h-screen">
+        <Helmet><title>Advirtizment</title></Helmet>
       <div className="text-center py-14">
         <h1 className="text-5xl uppercase">Your advertisement</h1>
       </div>
       <div className="max-w-[1000px] mx-auto mt-4">
         <div className="flex justify-end mb-4">
           <button
-            className="btn text-lg bg-green-300"
+            className="btn lg:text-lg bg-green-300"
             onClick={() => document.getElementById("my_modal_3").showModal()}
           >
             ADD NEW ADVICE
@@ -140,11 +142,11 @@ const ManageAdd = () => {
             <thead>
               <tr className="bg-custom-custom text-white">
                 <th>#</th>
-                <th className="text-xl">Image</th>
-                <th className="text-xl">Title</th>
-                <th className="text-xl">Price</th>
-                <th className="text-xl w-[200px]">Details</th>
-                <th className="text-xl">Status</th>
+                <th className="text-sm lg:text-xl">Image</th>
+                <th className="text-sm lg:text-xl">Title</th>
+                <th className="text-sm lg:text-xl">Price</th>
+                <th className="text-sm lg:text-xl w-[200px]">Details</th>
+                <th className="text-sm lg:text-xl">Status</th>
               </tr>
             </thead>
             <tbody>
@@ -158,10 +160,10 @@ const ManageAdd = () => {
                       </div>
                     </div>
                   </td>
-                  <td className="text-lg">{product.title.slice(0, 16)}...</td>
-                  <td className="text-xl">${product.price}</td>
+                  <td className=" text-sm lg:text-lg">{product.title.slice(0, 16)}...</td>
+                  <td className="text-sm lg:text-xl">${product.price}</td>
                   <td className="text-sm">{product.details.slice(0, 45)}..</td>
-                  <td className="text-lg">{product.status}</td>
+                  <td className="text-sm">{product.status}</td>
                 </tr>
               ))}
             </tbody>

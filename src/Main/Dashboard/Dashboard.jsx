@@ -1,7 +1,6 @@
 import { AiFillHome, AiFillShopping } from "react-icons/ai";
 import { FaList, FaUsers } from "react-icons/fa";
-import { GrContactInfo } from "react-icons/gr";
-import { IoHomeSharp, IoMenu } from "react-icons/io5";
+import { IoCart, IoHomeSharp } from "react-icons/io5";
 import { MdOutlinePayments } from "react-icons/md";
 import { NavLink, Outlet } from "react-router-dom";
 import navLogo from "../../assets/navLogo.png";
@@ -9,6 +8,7 @@ import { TbFileReport } from "react-icons/tb";
 import { RiAdvertisementFill, RiAdvertisementLine } from "react-icons/ri";
 import useAdmin from "../../Hooks/useAdmin";
 import useSeller from "../../Hooks/useSeller";
+import { TiThMenuOutline } from "react-icons/ti";
 
 const Dashboard = () => {
   const [isAdmin, isAdminLoading] = useAdmin();
@@ -263,24 +263,7 @@ const Dashboard = () => {
               ? "text-custom-custom font-bold font-inter text-base"
               : "text-base font-inter"
           }
-          to="/menu"
-        >
-          <div className="flex items-center gap-2">
-            <p>
-              <IoMenu size={25} />
-            </p>
-            <p>MENU</p>
-          </div>
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
-          className={({ isActive }) =>
-            isActive
-              ? "text-custom-custom font-bold font-inter text-base"
-              : "text-base font-inter"
-          }
-          to={`/shop/${"salad"}`}
+          to={`/shop`}
         >
           <div className="flex items-center gap-2">
             <p>
@@ -297,13 +280,13 @@ const Dashboard = () => {
               ? "text-custom-custom font-bold font-inter text-base"
               : "text-base font-inter"
           }
-          to="/contacts"
+          to="/carts"
         >
           <div className="flex items-center gap-2">
             <p>
-              <GrContactInfo size={25} />
+              <IoCart size={25} />
             </p>
-            <p>CONTACT</p>
+            <p>CART</p>
           </div>
         </NavLink>
       </li>
@@ -311,13 +294,11 @@ const Dashboard = () => {
   );
 
   return (
-    <div className="flex w-full">
-      <div className="sticky z-40 left-0 top-0 px-8 bg-base-300 w-[300px] h-screen">
-        <div className="pt-8 pb-12 flex flex-col items-center font-cinzel">
-          <img src={navLogo} alt="" />
-        </div>
-        <div className="px-1">
-          <ul className="space-y-6 border-b-4 border-black pb-10">
+    <div className="flex flex-col lg:flex-row w-full">
+      <div className="lg:sticky z-40 left-0 top-0 px-8 bg-base-300 lg:w-[300px] w-full lg:h-screen">
+        <img className="hidden lg:block" src={navLogo} alt="" />
+        <div className="px-1 mt-5">
+          <ul className="space-y-6 border-b-4 border-black pb-10 lg:block hidden">
             {isAdmin ? (
               adminNav
             ) : isSeller ? (
@@ -326,8 +307,35 @@ const Dashboard = () => {
               userNav
             )}
           </ul>
-          <ul className="space-y-6 pt-10">{bottomNav}</ul>
+          <ul className="space-y-6 pt-10 lg:block hidden">{bottomNav}</ul>
         </div>
+        <div className="lg:hidden flex justify-end px-4 py-3 bg-base-300">
+          
+          <div className="drawer">
+          <input id="my-drawer" type="checkbox" className="drawer-toggle" />
+          <div className="drawer-content">
+            {/* Page content here */}
+            <label htmlFor="my-drawer" className=" drawer-button "><TiThMenuOutline size={25} /></label>
+          </div> 
+          <div className="drawer-side">
+            <label htmlFor="my-drawer" aria-label="close sidebar" className="drawer-overlay"></label>
+            <ul className="menu p-4 w-[280px] min-h-full bg-base-200 text-base-content">
+              <img className=" w-[200px] mb-4" src={navLogo} alt="" />
+            {isAdmin ? (
+              adminNav
+            ) : isSeller ? (
+              sellerNav
+            ) : (
+              userNav
+            )}
+            <li className=" py-5 border-t-4"></li>
+            {bottomNav}
+            </ul>
+            
+          </div>
+        </div>
+        </div>
+
       </div>
       <div className="w-full min-h-screen">
         <Outlet />

@@ -43,7 +43,7 @@ const Shop = () => {
         medicine.shortDescription.toLowerCase().includes(query) 
     );
     setFilteredMedicines(filtered);
-    setCurrentPage(1); // Reset to the first page on new search
+    setCurrentPage(1);
   }, [searchQuery, medicines]);
 
   const handleViewProduct = (product) => {
@@ -106,13 +106,13 @@ const Shop = () => {
       </Helmet>
       <div className="bg-gray-50">
         <div className="flex py-6 pt-12 pl-9 gap-4 items-end max-w-[1540px] mx-auto">
-          <h1 className="text-6xl">All Medicine</h1>
+          <h1 className=" text-3xl lg:text-6xl">All Medicine</h1>
           <p className="text-lg text-custom-custom">Shop now...</p>
         </div>
       </div>
       <div className="max-w-[1540px] mt-16 flex justify-center mx-auto">
         <div className="">
-          <label className="input w-[400px] input-bordered flex items-center gap-2">
+          <label className="input lg:w-[400px] input-bordered flex items-center gap-2">
             <input
               type="text"
               className="grow"
@@ -129,7 +129,7 @@ const Shop = () => {
       <div className="mt-7 max-w-[1400px] mx-auto">
         <div className="">
           <>
-            <div className="flex justify-end mt-[-40px]">
+            <div className="flex justify-center md:justify-end md:mt-[-40px]">
               <div className="dropdown dropdown-bottom dropdown-end">
                 <div
                   tabIndex={0}

@@ -4,6 +4,8 @@ import { AuthContext } from "../../../../AuthProvider/AuthProvider";
 import useProducts from "../../../../Hooks/useProducts";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
+import UseCategory from "../../../../Hooks/UseCategory";
 
 const imageHostingKey = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const imageHostingAPI = `https://api.imgbb.com/1/upload?key=${imageHostingKey}`;
@@ -11,6 +13,7 @@ const imageHostingAPI = `https://api.imgbb.com/1/upload?key=${imageHostingKey}`;
 const ManageMedicine = () => {
   const { user } = useContext(AuthContext);
   const [products, refetch] = useProducts();
+  const [categories] = UseCategory();
   const axiosSecure = useAxiosSecure();
   const sellerMedicine = products.filter(
     (medicine) => medicine.sellerEmail === user.email
@@ -39,9 +42,9 @@ const ManageMedicine = () => {
         const res = await axiosSecure.post("/medicine", newMedicine);
         if (res.data.insertedId) {
           Swal.fire({
-            icon: 'success',
-            title: 'Success!',
-            text: 'Medicine added successfully!',
+            icon: "success",
+            title: "Success!",
+            text: "Medicine added successfully!",
           });
 
           // Close the modal
@@ -55,25 +58,29 @@ const ManageMedicine = () => {
         }
       }
     } catch (error) {
-      console.error('Error adding medicine:', error);
+      console.error("Error adding medicine:", error);
       Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: 'Something went wrong!',
+        icon: "error",
+        title: "Oops...",
+        text: "Something went wrong!",
       });
     }
   };
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <div className="text-center py-14">
-        <h1 className="text-5xl">Manage Your Medicine</h1>
+      <Helmet>
+        {" "}
+        <title>Manage Medicine</title>
+      </Helmet>
+      <div className="text-center py-7 lg:py-14">
+        <h1 className=" text-3xl lg:text-5xl">Manage Your Medicine</h1>
       </div>
       <div className="mx-auto p-8 max-w-[1200px] mt-16 bg-white">
         <div className="flex mb-8 justify-between">
-          <h1 className="text-2xl">{`Your Total Product: ${sellerMedicine.length}`}</h1>
+          <h1 className="lg:text-2xl">{`Your Total Product: ${sellerMedicine.length}`}</h1>
           <div className="flex items-center gap-4">
-            <h1 className="text-xl">Add New Medicine</h1>
+            <h1 className="lg:text-xl">Add New Medicine</h1>
             <button
               className="text-lg btn bg-green-300 text-white"
               onClick={() => document.getElementById("my_modal_3").showModal()}
@@ -90,7 +97,10 @@ const ManageMedicine = () => {
                   ✕
                 </button>
                 <h3 className="font-bold text-lg">Add New Medicine</h3>
-                <form onSubmit={handleSubmit(handleAddMedicine)} className="space-y-4">
+                <form
+                  onSubmit={handleSubmit(handleAddMedicine)}
+                  className="space-y-4"
+                >
                   <div className="flex gap-2 w-full">
                     <div>
                       <label className="text-sm font-medium text-gray-700">
@@ -152,9 +162,14 @@ const ManageMedicine = () => {
                         required
                       >
                         <option value="">Select Category</option>
-                        <option value="Pain Relief">Pain Relief</option>
-                        <option value="Antibiotics">Antibiotics</option>
-                        <option value="Vitamins">Vitamins</option>
+                        {categories.map((category) => (
+                          <option
+                            key={category._id}
+                            value={category.categoryName}
+                          >
+                            {category.categoryName}
+                          </option>
+                        ))}
                         {/* Add more categories as needed */}
                       </select>
                     </div>
@@ -162,18 +177,13 @@ const ManageMedicine = () => {
                       <label className="text-sm font-medium text-gray-700">
                         Company
                       </label>
-                      <select
-                        name="company"
+                      <input
+                        type="text"
                         {...register("medicineCompany", { required: true })}
                         className="mt-1 w-full p-2 border border-gray-300 rounded-md"
+                        placeholder="Enter Company Name"
                         required
-                      >
-                        <option value="">Select Company</option>
-                        <option value="Company A">Company A</option>
-                        <option value="Company B">Company B</option>
-                        <option value="Company C">Company C</option>
-                        {/* Add more companies as needed */}
-                      </select>
+                      />
                     </div>
                   </div>
                   <div className="flex gap-2 w-full">
@@ -215,7 +225,10 @@ const ManageMedicine = () => {
                     />
                   </div>
                   <div className="flex justify-end mt-3">
-                    <button type="submit" className="btn bg-green-300 text-white">
+                    <button
+                      type="submit"
+                      className="btn bg-green-300 text-white"
+                    >
                       Add Medicine
                     </button>
                   </div>
@@ -229,20 +242,22 @@ const ManageMedicine = () => {
             <thead>
               <tr className="bg-custom-custom text-white">
                 <th></th>
-                <th className="text-xl">Name</th>
-                <th className="text-xl">Category</th>
-                <th className="text-xl">Company</th>
-                <th className="text-xl">Unit Price</th>
+                <th className="lg:text-xl">Name</th>
+                <th className="lg:text-xl">Category</th>
+                <th className="lg:text-xl">Company</th>
+                <th className="lg:text-xl">Unit Price</th>
               </tr>
             </thead>
             <tbody>
               {sellerMedicine.map((product, index) => (
                 <tr key={product._id} className="hover">
                   <th className="">{index + 1}</th>
-                  <td className="text-lg">{product.medicineName}</td>
-                  <td className="text-base">{product.category}</td>
-                  <td className="text-base">{product.medicineCompany}</td>
-                  <td className="text-base font-semibold">${product.perUnitPrice}</td>
+                  <td className="lg:text-lg">{product.medicineName}</td>
+                  <td className="lg:text-base">{product.category}</td>
+                  <td className="lg:text-base">{product.medicineCompany}</td>
+                  <td className="lg:text-base font-semibold">
+                    ${product.perUnitPrice}
+                  </td>
                 </tr>
               ))}
             </tbody>

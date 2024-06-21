@@ -49,7 +49,7 @@ const ManageCart = () => {
         <title>MediMall || Carts</title>
       </Helmet>
       <div className="bg-gray-50 py-12 text-center">
-        <h1 className="text-5xl">Your Medicine Carts</h1>
+        <h1 className="text-3xl lg:text-5xl">Your Medicine Carts</h1>
       </div>
       <div className="max-w-[1340px] my-10 mx-auto">
         <div className="flex justify-end items-center gap-5 my-5">

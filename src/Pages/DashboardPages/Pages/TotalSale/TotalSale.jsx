@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import usePaymentDetails from "../../../../Hooks/usePaymentDetails";
 
 const TotalSale = () => {
@@ -10,7 +11,10 @@ const TotalSale = () => {
 
     return (
         <div className=" bg-gray-100">
-            <div className=" flex justify-center items-center min-h-screen ">
+            <Helmet>
+                <title>Admin Statics</title>
+            </Helmet>
+            <div className="  grid lg:grid-cols-4 grid-cols-1 justify-center items-center min-h-screen ">
                 <div className=" bg-orange-400 rounded-2xl text-center p-6 m-4 ">
                     <h1 className=" text-3xl">Total Sales:</h1>
                     <h2 className=" text-3xl mt-2">{payments.length}</h2>

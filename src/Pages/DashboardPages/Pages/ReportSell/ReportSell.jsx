@@ -100,8 +100,8 @@ const ReportSell = () => {
       <Helmet>
         <title>Manage All Categories</title>
       </Helmet>
-      <div className="text-center py-14">
-        <h1 className="text-5xl">SALES REPORT</h1>
+      <div className="text-center py-7 lg:py-14">
+        <h1 className=" text-3xl lg:text-5xl">SALES REPORT</h1>
       </div>
  <div className=' max-w-[1300px] mx-auto'>
  <div className="flex flex-col lg:flex-row items-center my-5 space-x-3">
@@ -134,15 +134,15 @@ const ReportSell = () => {
         </button>
       </div>
 
-      <div className="overflow-x-auto my-10">
+      <div className="overflow-x-auto my-10 mx-3">
         <table className="table">
           <thead>
             <tr className=' bg-custom-custom text-white'>
-              <th className=' text-xl'>Medicine Name</th>
-              <th className=' text-xl'>Seller Email</th>
-              <th className=' text-xl'>Buyer Email</th>
-              <th className=' text-xl'>Date</th>
-              <th className=' text-xl'>Total Price</th>
+              <th className=' lg:text-xl'>Medicine Name</th>
+              <th className=' lg:text-xl'>Seller Email</th>
+              <th className=' lg:text-xl'>Buyer Email</th>
+              <th className=' lg:text-xl'>Date</th>
+              <th className=' lg:text-xl'>Total Price</th>
             </tr>
           </thead>
           <tbody>
@@ -150,11 +150,11 @@ const ReportSell = () => {
             {filteredPayments.map((paymentData, index) => (
               <tr key={index}>
                 {/* Display first medicine name from array */}
-                <td className=' text-lg'>{paymentData.medicineName && paymentData.medicineName.length > 0 ? paymentData.medicineName[0] : ''}</td>
-                <td className=' text-lg'>{paymentData.sellerEmail && paymentData.sellerEmail.length > 0 ? paymentData.sellerEmail[0] : ''}</td>
-                <td className=' text-lg'>{paymentData.email}</td>
-                <td className=' text-lg'>{paymentData.date}</td>
-                <td className=' text-lg'> ${paymentData.amount /100}</td>
+                <td className=' text-sm lg:text-lg'>{paymentData.medicineName && paymentData.medicineName.length > 0 ? paymentData.medicineName[0] : ''}</td>
+                <td className=' text-sm lg:text-lg'>{paymentData.sellerEmail && paymentData.sellerEmail.length > 0 ? paymentData.sellerEmail[0] : ''}</td>
+                <td className=' text-sm lg:text-lg'>{paymentData.email}</td>
+                <td className=' text-sm lg:text-lg'>{paymentData.date}</td>
+                <td className=' text-sm lg:text-lg'> ${paymentData.amount /100}</td>
               </tr>
             ))}
           </tbody>

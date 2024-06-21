@@ -1,6 +1,7 @@
 import toast from 'react-hot-toast';
 import UseAdvice from '../../../../Hooks/UseAdvice';
 import useAxiosSecure from '../../../../Hooks/useAxiosSecure';
+import { Helmet } from 'react-helmet-async';
 
 const ManageAdvice = () => {
     const axiosSecure = useAxiosSecure();
@@ -34,20 +35,21 @@ const ManageAdvice = () => {
 
     return (
         <div className="min-h-screen bg-gray-50">
-            <div className="text-center py-14">
-                <h1 className="text-5xl">Manage Advertisements</h1>
+            <Helmet><title>Manage Advice</title></Helmet>
+            <div className="text-center py-7 lg:py-14">
+                <h1 className=" text-3xl lg:text-5xl">Manage Advertisements</h1>
             </div>
             <div className="mx-auto p-8 max-w-[1200px] mt-10 bg-white">
                 <div className="overflow-x-auto">
                     <table className="table">
                         <thead>
                             <tr className="bg-custom-custom text-white">
-                                <th className="text-xl">Medicine Image</th>
-                                <th className="text-xl">Medicine Name</th>
-                                <th className="text-xl">Description</th>
-                                <th className="text-xl">Seller Email</th>
-                                <th className="text-xl">Status</th>
-                                <th className="text-center text-xl">Actions</th>
+                                <th className=" text-sm lg:text-xl">Medicine Image</th>
+                                <th className=" text-sm lg:text-xl">Medicine Name</th>
+                                <th className=" text-sm lg:text-xl">Description</th>
+                                <th className=" text-sm lg:text-xl">Seller Email</th>
+                                <th className=" text-sm lg:text-xl">Status</th>
+                                <th className="text-center  text-sm lg:text-xl">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -61,10 +63,10 @@ const ManageAdvice = () => {
                                     <td className="flex justify-center space-x-4">
                                         {
                                             advice.status === 'accept' ?
-                                                <button onClick={() => removeSlide(advice._id)} className='text-base btn bg-red-300'>
+                                                <button onClick={() => removeSlide(advice._id)} className=' text-sm lg:text-base btn bg-red-300'>
                                                     REMOVE SLIDE
                                                 </button> :
-                                                <button onClick={() => addSlide(advice._id)} className='text-base btn bg-green-300'>
+                                                <button onClick={() => addSlide(advice._id)} className=' text-sm lg:text-base btn bg-green-300'>
                                                     ADD SLIDE
                                                 </button>
                                         }

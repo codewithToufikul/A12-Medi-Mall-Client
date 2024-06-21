@@ -64,7 +64,7 @@ const DiscountPerCard = ({product}) => {
                     <p className=" text-3xl font-medium text-custom-custom">${lastDiscounted}</p>
                 </div>
                 <div onClick={()=>handleAddCart(product)}>
-                <CommonButton textSize={'text-base'} />
+                <CommonButton textSize={'text-sm'} />
                 </div>
                 </div>
             </div>

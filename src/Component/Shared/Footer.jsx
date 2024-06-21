@@ -5,10 +5,10 @@ import { FaInstagramSquare } from 'react-icons/fa';
 const Footer = () => {
   return (
 <div className=' bg-[#FFE8C8]'>
-<footer className="footer justify-between  mb-2 mx-auto pt-16 pb-10 rounded-2xl px-64    text-base-content">
+<footer className="footer justify-between  mb-2 mx-auto pt-16 pb-10 rounded-2xl lg:px-64    text-base-content">
       <aside className=''> 
-      <img className=" w-[300px]" src={navLogo} alt="" />
-        <div className=' w-[400px]'>
+      <img className=" w-[200px] lg:w-[300px]" src={navLogo} alt="" />
+        <div className=' lg:w-[400px]'>
         <p className=' text-base'>
         Your trusted online marketplace for all things health. Discover authentic medicines from verified vendors. With our commitment to quality and convenience, we are here to support your wellness journey.
         </p>

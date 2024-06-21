@@ -1,6 +1,6 @@
 const NewsLatter = () => {
   return (
-    <div className=" flex border-2 mb-[-50px] mt-20 z-10 rounded-2xl p-5 px-10  max-w-[1140px] mx-auto justify-between items-center">
+    <div className=" flex flex-wrap border-2 lg:mb-[-50px] mt-20 z-10 rounded-2xl p-5 px-10  max-w-[1140px] mx-auto justify-between items-center">
       <div className=" bg-top bg-cover space-y-3" style={{backgroundImage: 'url(https://i.ibb.co/zbP9VGc/bg-newsletter.png)'}}>
         <h1 className=" text-2xl font-semibold">Subscribe to our Newsletter</h1>
         <div className="join w-full">

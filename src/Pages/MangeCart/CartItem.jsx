@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import useCart from "../../Hooks/useCart";
@@ -6,6 +7,7 @@ import useCart from "../../Hooks/useCart";
 const CartItem = ({ product }) => {
   const axiosSecure = useAxiosSecure();
   const [carts, refetch] = useCart();
+  console.log(carts);
   const {
     medicineImage,
     genericName,
@@ -56,7 +58,7 @@ const CartItem = ({ product }) => {
 
   const handleDecreaseQuantity = async (_id) => {
     try {
-      if (quantity > 1) { // Prevent quantity from going below 1
+      if (quantity > 1) {
         const response = await axiosSecure.patch(`/cart/${_id}/decrease`);
         if (response.data.modifiedCount === 1) {
           refetch();
@@ -70,13 +72,13 @@ const CartItem = ({ product }) => {
 
   return (
     <div>
-      <div className="card card-side  border-2">
+      <div className="card card-side flex flex-col lg:flex-row  border-2">
         <figure className="w-72">
           <img className="w-full" src={medicineImage} alt={genericName} />
         </figure>
         <div className="card-body">
           <div>
-            <div className="flex justify-between">
+            <div className="flex md:flex-row flex-col justify-between">
               <div>
                 <h3 className="text-2xl mb-2">{genericName}</h3>
               </div>
