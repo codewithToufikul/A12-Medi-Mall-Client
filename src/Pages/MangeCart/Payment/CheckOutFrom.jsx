@@ -5,6 +5,7 @@ import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../AuthProvider/AuthProvider";
 import useCart from "../../../Hooks/useCart";
+import moment from "moment/moment";
 
 // eslint-disable-next-line react/prop-types
 const CheckoutForm = ({ totalAmount }) => {
@@ -52,15 +53,15 @@ const CheckoutForm = ({ totalAmount }) => {
         setSucceeded(true);
         console.log("Payment succeeded:", payload.paymentIntent);
 
-        const currentDate = new Date().toISOString();
+        // const currentDate = new Date().toISOString();
 
         await axios.post("http://localhost:5000/save-payment-details", {
           paymentIntent: payload.paymentIntent,
           userEmail: user.email,
           status: 'pending',
-          date: currentDate,
+          date: moment().format('MM/DD/YYYY'),
           sellerEmail: carts.map(item => item.sellerEmail),
-          items: carts.map(item=> item),
+          medicineName:carts.map(item=>item.medicineName),
         });
 
         Swal.fire({

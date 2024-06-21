@@ -9,19 +9,17 @@ import ManageCart from "../MangeCart/ManageCart";
 import CheckoutPage from "../MangeCart/Payment/CheckOutPage";
 import InvoicePage from "../InvoicePage/InvoicePage";
 import Dashboard from "../../Main/Dashboard/Dashboard";
-import TotalSale from "../DashboardPages/Pages/TotalSale/TotalSale";
 import ManageUser from "../DashboardPages/Pages/ManageUser/ManageUser";
 import ManageCategory from "../DashboardPages/Pages/ManageCategory/ManageCategory";
 import ManagePayments from "../DashboardPages/Pages/ManagePayments/ManagePayments";
 import ManageAdvice from "../DashboardPages/Pages/ManageAdvice/ManageAdvice";
-import UserHome from "../DashboardPages/UserHome/UserHome";
 import UserPaymentHistiry from "../DashboardPages/Pages/UserPaymentHistiry/UserPaymentHistiry";
 import AdminRoute from "./AdminRoute/AdminRoute";
 import ManageMedicine from "../DashboardPages/Pages/ManageMedicine/ManageMedicine";
-import SellerHome from "../DashboardPages/Pages/SellerHome/SellerHome";
 import PaymentsHistory from "../DashboardPages/Pages/PaymentsHistory/PaymentsHistory";
 import ManageAdd from "../DashboardPages/Pages/ManageAdd/ManageAdd";
 import DashboardHome from "../DashboardPages/Pages/DashboardHome/DashboardHome";
+import ReportSell from "../DashboardPages/Pages/ReportSell/ReportSell";
 
 export const router = createBrowserRouter([
   {
@@ -103,6 +101,12 @@ export const router = createBrowserRouter([
             <ManageAdvice></ManageAdvice>
           </AdminRoute>
         ),
+      },
+      {
+        path: 'report-sale',
+        element: <AdminRoute>
+          <ReportSell></ReportSell>
+        </AdminRoute>
       },
       // user route
       {
