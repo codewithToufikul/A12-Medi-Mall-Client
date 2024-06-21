@@ -190,7 +190,7 @@ const ReportSell = () => {
                   {filteredPayments.map((paymentData, index) => (
                     <View key={index} style={styles.tableRow}>
                       <View style={styles.tableCol}>
-                        <Text style={styles.tableCell}>{paymentData.medicineName}</Text>
+                        <Text style={styles.tableCell}>{paymentData.medicineName && paymentData.medicineName.length > 0 ? paymentData.medicineName[0] : ''}</Text>
                       </View>
                       <View style={styles.tableCol}>
                         <Text style={styles.tableCell}>{paymentData.sellerEmail && paymentData.sellerEmail.length > 0 ? paymentData.sellerEmail[0] : ''}</Text>

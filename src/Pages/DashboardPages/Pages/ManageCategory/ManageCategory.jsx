@@ -119,12 +119,14 @@ const ManageCategory = () => {
         <h1 className="text-5xl">Manage All Categories</h1>
       </div>
       <div className="mx-auto p-8 max-w-[1200px] mt-10 bg-white">
-        <button
-          className="btn bg-blue-300 mb-5 text-base text-white"
+       <div className=" flex justify-center">
+       <button
+          className="btn bg-blue-500  mb-5 text-base font-semibold text-white"
           onClick={() => setIsModalOpen(true)}
         >
-          Add Category
+          ADD NEW CATEGORY
         </button>
+       </div>
 
         {isModalOpen && (
           <dialog id="my_modal_3" className="modal" open>

@@ -7,7 +7,7 @@ import "react-tooltip/dist/react-tooltip.css";
 import { Tooltip } from "react-tooltip";
 import { FaArrowUp91 } from "react-icons/fa6";
 import "react-loading-skeleton/dist/skeleton.css";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import usePublicAxios from "../../Hooks/usePublicAxios";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 import toast from "react-hot-toast";
@@ -21,7 +21,30 @@ const Shop = () => {
   console.log(carts);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const axiosPublic = usePublicAxios();
+  const [medicines, setMedicines] = useState([]);
+  const [filteredMedicines, setFilteredMedicines] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [searchQuery, setSearchQuery] = useState("");
+  const itemsPerPage = 6;
 
+  useEffect(() => {
+    setMedicines(products);
+    setFilteredMedicines(products);
+  }, [products]);
+
+  useEffect(() => {
+    const query = searchQuery.toLowerCase();
+    const filtered = medicines.filter(
+      (medicine) =>
+        medicine.medicineName.toLowerCase().includes(query) ||
+        medicine.genericName.toLowerCase().includes(query) ||
+        medicine.medicineCompany.toLowerCase().includes(query) ||
+        medicine.category.toLowerCase().includes(query) ||
+        medicine.shortDescription.toLowerCase().includes(query) 
+    );
+    setFilteredMedicines(filtered);
+    setCurrentPage(1); // Reset to the first page on new search
+  }, [searchQuery, medicines]);
 
   const handleViewProduct = (product) => {
     setSelectedProduct(product);
@@ -29,8 +52,8 @@ const Shop = () => {
   };
 
   const handleAddCart = async (medicine) => {
-    if(!user){
-      return toast.error('login fast !')
+    if (!user) {
+      return toast.error("login fast !");
     }
     setLoading(true);
     const product = {
@@ -51,13 +74,30 @@ const Shop = () => {
       const res = await axiosPublic.post("/cart", product);
       setLoading(false);
       console.log(res.data);
-      toast.success('Successfully added!');
+      toast.success("Successfully added!");
       refetch();
     } catch (error) {
       setLoading(false);
       toast.error(error.message);
     }
   };
+
+  const handleLowToHigh = () => {
+    const sortedProducts = [...filteredMedicines].sort((a, b) => a.perUnitPrice - b.perUnitPrice);
+    setFilteredMedicines(sortedProducts);
+  };
+
+  const handleHighToLow = () => {
+    const sortedProducts = [...filteredMedicines].sort((a, b) => b.perUnitPrice - a.perUnitPrice);
+    setFilteredMedicines(sortedProducts);
+  };
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
+
+  const totalPages = Math.ceil(filteredMedicines.length / itemsPerPage);
+  const currentItems = filteredMedicines.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
 
   return (
     <div>
@@ -73,93 +113,111 @@ const Shop = () => {
       <div className="max-w-[1540px] mt-16 flex justify-center mx-auto">
         <div className="">
           <label className="input w-[400px] input-bordered flex items-center gap-2">
-            <input type="text" className="grow" placeholder="Search Medicine" />
+            <input
+              type="text"
+              className="grow"
+              placeholder="Search Medicine"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
             <span className="text-3xl text-custom-custom">
               <RiSearchLine />
             </span>
           </label>
         </div>
       </div>
-      <div className="  mt-7 max-w-[1400px] mx-auto">
+      <div className="mt-7 max-w-[1400px] mx-auto">
         <div className="">
-    
-            <>
-              <div className="flex justify-end mt-[-40px]">
-                <div className="dropdown dropdown-bottom dropdown-end">
-                  <div
-                    tabIndex={0}
-                    role="button"
-                    className="text-base btn bg-transparent"
-                  >
-                    Sort by <FaArrowUp91 />
-                  </div>
-                  <ul
-                    tabIndex={0}
-                    className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52"
-                  >
-                    <li>
-                      <a>Item 1</a>
-                    </li>
-                    <li>
-                      <a>Item 2</a>
-                    </li>
-                  </ul>
+          <>
+            <div className="flex justify-end mt-[-40px]">
+              <div className="dropdown dropdown-bottom dropdown-end">
+                <div
+                  tabIndex={0}
+                  role="button"
+                  className="text-base btn bg-transparent"
+                >
+                  Sort by Price <FaArrowUp91 />
                 </div>
+                <ul
+                  tabIndex={0}
+                  className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52"
+                >
+                  <li onClick={handleLowToHigh}>
+                    <a>Low to High</a>
+                  </li>
+                  <li onClick={handleHighToLow}>
+                    <a>High to Low</a>
+                  </li>
+                </ul>
               </div>
-              <div>
-                <div className="overflow-x-auto mt-3">
-                  <table className="table">
-                    <thead>
-                      <tr>
-                        <th></th>
-                        <th className="text-lg">Name</th>
-                        <th className="text-lg">Category</th>
-                        <th className="text-lg">Company</th>
-                        <th className="text-lg">Per Unit Price</th>
-                        <th className="text-lg text-center">Action</th>
+            </div>
+            <div>
+              <div className="overflow-x-auto mt-3">
+                <table className="table">
+                  <thead>
+                    <tr>
+                      <th></th>
+                      <th className="text-lg">Name</th>
+                      <th className="text-lg">Category</th>
+                      <th className="text-lg">Company</th>
+                      <th className="text-lg">Per Unit Price</th>
+                      <th className="text-lg text-center">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {currentItems.map((product, index) => (
+                      <tr key={product._id} className="hover">
+                        <th className="">
+                          {(currentPage - 1) * itemsPerPage + index + 1}
+                        </th>
+                        <td className="text-lg">{product.medicineName}</td>
+                        <td className="text-base">{product.category}</td>
+                        <td className="text-base">{product.medicineCompany}</td>
+                        <td className="text-base font-semibold">
+                          ${product.perUnitPrice}
+                        </td>
+                        <td className="flex justify-center items-center gap-5 text-base font-semibold">
+                          <button
+                            onClick={() => handleAddCart(product)}
+                            data-tooltip-id="my-tooltip"
+                            data-tooltip-content="Add Cart"
+                            className={`btn hover:text-white rounded-md bg-white text-custom-custom border-2 border-custom-custom hover:bg-custom-custom text-lg`}
+                          >
+                            {loading ? (
+                              <span className="loading w-5 loading-spinner text-white"></span>
+                            ) : (
+                              <FaCartArrowDown />
+                            )}
+                          </button>
+                          <button
+                            data-tooltip-id="my-tooltip"
+                            data-tooltip-content="View Medicine"
+                            className="btn hover:text-white rounded-md bg-white border-2 hover:bg-custom-custom text-xl"
+                            onClick={() => handleViewProduct(product)}
+                          >
+                            <FiEye />
+                          </button>
+                        </td>
                       </tr>
-                    </thead>
-                    <tbody>
-                      {products.map((product, index) => (
-                        <tr key={product._id} className="hover">
-                          <th className="">{index + 1}</th>
-                          <td className="text-lg">{product.medicineName}</td>
-                          <td className="text-base">{product.category}</td>
-                          <td className="text-base">
-                            {product.medicineCompany}
-                          </td>
-                          <td className="text-base font-semibold">
-                            ${product.perUnitPrice}
-                          </td>
-                          <td className="flex justify-center items-center gap-5 text-base font-semibold">
-                            <button
-                              onClick={() => handleAddCart(product)}
-                              data-tooltip-id="my-tooltip"
-                              data-tooltip-content="Add Cart"
-                              className={`btn hover:text-white rounded-md bg-white text-custom-custom border-2 border-custom-custom hover:bg-custom-custom text-lg`}
-                            >
-                              {loading ? (
-                                <span className="loading w-5 loading-spinner text-white"></span>
-                              ) : (
-                                <FaCartArrowDown />
-                              )}
-                            </button>
-                            <button
-                              data-tooltip-id="my-tooltip"
-                              data-tooltip-content="View Medicine"
-                              className="btn hover:text-white rounded-md bg-white border-2 hover:bg-custom-custom text-xl"
-                              onClick={() => handleViewProduct(product)}
-                            >
-                              <FiEye />
-                            </button>
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
+                    ))}
+                  </tbody>
+                </table>
               </div>
-            </>
+              <div className="flex justify-center mb-4 mt-4">
+                {Array.from({ length: totalPages }, (_, i) => (
+                  <button
+                    key={i + 1}
+                    onClick={() => handlePageChange(i + 1)}
+                    className={`btn mr-3 bg-transparent text-lg  border-2 border-custom-custom  ${
+                      currentPage === i + 1 ? "btn-active" : ""
+                    }`}
+                  >
+                    {i + 1}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </>
         </div>
       </div>
       <Tooltip id="my-tooltip" />
@@ -171,52 +229,39 @@ const Shop = () => {
                 ✕
               </button>
             </form>
-            <div className=" grid items-center grid-cols-2 p-10">
-              <div className=" w-[400px]">
-                <img
-                  className=""
-                  src={selectedProduct.medicineImage}
-                  alt={selectedProduct.medicineName}
-                />
-              </div>
-              <div className=" w-full">
-                <div className=" flex justify-between mr-5">
-                  <div className="">
-                    <h1 className=" text-4xl">
-                      {selectedProduct.medicineName}
-                    </h1>
-                    <h3 className=" text-xl mt-2">
-                      {selectedProduct.genericName}
-                    </h3>
-                  </div>
-                  <div>
-                    <h2 className=" font-semibold text-custom-custom">
-                      {selectedProduct.category}
-                    </h2>
-                  </div>
-                </div>
-                <h2 className=" text-xl mt-5">
-                  <span className=" text-xl font-semibold ">Company:</span>{" "}
-                  {selectedProduct.medicineCompany}
-                </h2>
-                <h1 className=" text-lg mt-6">
-                  <span className=" font-semibold">Mas Unit:</span>{" "}
+            <div className="flex gap-4 p-8 justify-center items-center w-fit">
+              <img
+                src={selectedProduct.medicineImage}
+                alt="Shoes"
+                className="rounded-xl w-52"
+              />
+              <div className="">
+                <h3 className="text-2xl font-bold">
+                  {selectedProduct.medicineName}
+                </h3>
+                <p className="py-4 max-w-lg text-lg">
+                  {selectedProduct.shortDescription}
+                </p>
+                <p className="text-lg">
+                  <span className="font-semibold">Generic Name: </span>
+                  {selectedProduct.genericName}
+                </p>
+                <p className="text-lg">
+                  <span className="font-semibold">Brand Name: </span>
+                  {selectedProduct.medicineName}
+                </p>
+                <p className="text-lg">
+                  <span className="font-semibold">Category: </span>
+                  {selectedProduct.category}
+                </p>
+                <p className="text-lg">
+                  <span className="font-semibold">Mass: </span>
                   {selectedProduct.massUnit}
-                </h1>
-                <h1 className=" text-lg">
-                  <span className=" font-semibold">Per Unit Price:</span> $
-                  {selectedProduct.perUnitPrice}
-                </h1>
-                <h1 className=" text-lg">
-                  <span className=" font-semibold">Discount:</span>{" "}
-                  {selectedProduct.discountPercentage}%
-                </h1>
-                <div className=" mb-5 w-[600px]">
-                  <h1 className=" text-lg">
-                    <span className=" font-semibold">Medicine Details:</span>{" "}
-                    {selectedProduct.shortDescription.slice(0, 150)}
-                  </h1>
-                </div>
+                </p>
+                <p className="text-lg">
+                  <span className="font-semibold">Price: </span>
+                  ${selectedProduct.perUnitPrice}
+                </p>
               </div>
             </div>
           </div>
