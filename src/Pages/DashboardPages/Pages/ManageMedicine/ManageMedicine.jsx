@@ -5,13 +5,13 @@ import useProducts from "../../../../Hooks/useProducts";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 
-const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
-const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
+const imageHostingKey = import.meta.env.VITE_IMAGE_HOSTING_KEY;
+const imageHostingAPI = `https://api.imgbb.com/1/upload?key=${imageHostingKey}`;
 
 const ManageMedicine = () => {
   const { user } = useContext(AuthContext);
   const [products, refetch] = useProducts();
-  const axiosSecure = useAxiosSecure()
+  const axiosSecure = useAxiosSecure();
   const sellerMedicine = products.filter(
     (medicine) => medicine.sellerEmail === user.email
   );
@@ -21,45 +21,41 @@ const ManageMedicine = () => {
   const handleAddMedicine = async (data) => {
     const formData = new FormData();
     formData.append("image", data.image[0]);
-  
+
     try {
-      const imgbbResponse = await fetch(image_hosting_api, {
+      const imgbbResponse = await fetch(imageHostingAPI, {
         method: "POST",
         body: formData,
       });
       const imgbbResult = await imgbbResponse.json();
-  
+
       if (imgbbResult.success) {
         const newMedicine = {
           ...data,
           medicineImage: imgbbResult.data.url,
           sellerEmail: user.email,
         };
-  
+
         const res = await axiosSecure.post("/medicine", newMedicine);
-        console.log(res.data);
-        if(res.data.insertedId){
-            Swal.fire({
-                icon: 'success',
-                title: 'Success!',
-                text: 'Medicine added successfully!',
-              });
-        
-              // Close the modal
-              document.getElementById("my_modal_3").close();
-        
-              // Fetch updated list of products
-              refetch();
-        
-              // Reset the form after submission (if needed)
-              reset();
+        if (res.data.insertedId) {
+          Swal.fire({
+            icon: 'success',
+            title: 'Success!',
+            text: 'Medicine added successfully!',
+          });
+
+          // Close the modal
+          document.getElementById("my_modal_3").close();
+
+          // Fetch updated list of products
+          refetch();
+
+          // Reset the form after submission
+          reset();
         }
-        // Show SweetAlert upon successful submission
-        
       }
     } catch (error) {
       console.error('Error adding medicine:', error);
-      // Handle error scenarios
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
@@ -67,7 +63,6 @@ const ManageMedicine = () => {
       });
     }
   };
-  
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -76,7 +71,7 @@ const ManageMedicine = () => {
       </div>
       <div className="mx-auto p-8 max-w-[1200px] mt-16 bg-white">
         <div className="flex mb-8 justify-between">
-          <h1 className="text-2xl ">{`Your Total Product: ${sellerMedicine.length}`}</h1>
+          <h1 className="text-2xl">{`Your Total Product: ${sellerMedicine.length}`}</h1>
           <div className="flex items-center gap-4">
             <h1 className="text-xl">Add New Medicine</h1>
             <button

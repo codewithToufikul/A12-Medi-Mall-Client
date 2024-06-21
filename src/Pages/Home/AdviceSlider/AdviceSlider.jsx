@@ -20,10 +20,12 @@ const AdviceSlider = () => {
           <SwiperSlide key={advice}>
             <div className="hero my-20">
               <div className="hero-content flex-col justify-between lg:flex-row-reverse">
+                <div className=" h-[400px] w-[500px]">
                 <img
-                  src={advice.medicine_image}
+                  src={advice.adviceImage}
                   className=""
                 />
+                </div>
                 <div className=" w-1/2 space-y-4 ">
                   <h1 className="text-7xl font-bold">{advice.title}</h1>
                   <p className=" text-lg font-medium">

@@ -1,3 +1,4 @@
+import React from 'react';
 import toast from 'react-hot-toast';
 import UseAdvice from '../../../../Hooks/UseAdvice';
 import useAxiosSecure from '../../../../Hooks/useAxiosSecure';
@@ -6,20 +7,31 @@ const ManageAdvice = () => {
     const axiosSecure = useAxiosSecure();
     const [advices, refetch] = UseAdvice();
 
-    const handleToggleVisibility = async (adviceId) => {
+    const addSlide = async (id) => {
         try {
-            const res = await axiosSecure.patch(`/advices/${adviceId}/toggle`);
-            if (res.data.modifiedCount > 0) {
-                toast.success('Advice visibility toggled successfully');
+            const response = await axiosSecure.patch(`/advice/${id}`, { status: 'accept' });
+            if (response.data.modifiedCount > 0) {
+                toast.success('Advice accepted');
                 refetch();
-            } else {
-                toast.error('Failed to toggle advice visibility');
             }
         } catch (error) {
-            console.error('Failed to toggle advice visibility:', error);
-            toast.error('Failed to toggle advice visibility');
+            toast.error('Failed to update status');
+            console.error('Error updating status:', error);
         }
-    };
+    }
+
+    const removeSlide = async (id) => {
+        try {
+            const response = await axiosSecure.patch(`/advice/${id}`, { status: 'pending' });
+            if (response.data.modifiedCount > 0) {
+                toast.success('Advice removed from slide');
+                refetch();
+            }
+        } catch (error) {
+            toast.error('Failed to update status');
+            console.error('Error updating status:', error);
+        }
+    }
 
     return (
         <div className="min-h-screen bg-gray-50">
@@ -35,23 +47,28 @@ const ManageAdvice = () => {
                                 <th className="text-xl">Medicine Name</th>
                                 <th className="text-xl">Description</th>
                                 <th className="text-xl">Seller Email</th>
+                                <th className="text-xl">Status</th>
                                 <th className="text-center text-xl">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
                             {advices.map((advice) => (
                                 <tr key={advice._id}>
-                                    <td><img src={advice.image} alt={advice.name} className="w-20 h-20 object-cover" /></td>
-                                    <td>{advice.name}</td>
-                                    <td>{advice.description}</td>
+                                    <td><img src={advice.adviceImage} alt={advice.name} className="w-20 h-20 object-cover" /></td>
+                                    <td>{advice.title.slice(0, 15)}</td>
+                                    <td>{advice.details.slice(0, 40)}....</td>
                                     <td>{advice.sellerEmail}</td>
+                                    <td>{advice.status}</td>
                                     <td className="flex justify-center space-x-4">
-                                        <button
-                                            onClick={() => handleToggleVisibility(advice._id)}
-                                            className={`btn px-4 py-2 ${advice.isVisible ? 'bg-red-300' : 'bg-green-300'} text-white hover:${advice.isVisible ? 'bg-red-400' : 'bg-green-400'}`}
-                                        >
-                                            {advice.isVisible ? 'Remove from Slide' : 'Add to Slide'}
-                                        </button>
+                                        {
+                                            advice.status === 'accept' ?
+                                                <button onClick={() => removeSlide(advice._id)} className='text-base btn bg-red-300'>
+                                                    REMOVE SLIDE
+                                                </button> :
+                                                <button onClick={() => addSlide(advice._id)} className='text-base btn bg-green-300'>
+                                                    ADD SLIDE
+                                                </button>
+                                        }
                                     </td>
                                 </tr>
                             ))}
