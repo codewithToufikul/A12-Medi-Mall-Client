@@ -8,7 +8,6 @@ import { Tooltip } from "react-tooltip";
 import { FaArrowUp91 } from "react-icons/fa6";
 import "react-loading-skeleton/dist/skeleton.css";
 import { useContext, useState } from "react";
-import CommonButton from "../../Component/CommonButton";
 import usePublicAxios from "../../Hooks/usePublicAxios";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 import toast from "react-hot-toast";
@@ -217,9 +216,6 @@ const Shop = () => {
                     <span className=" font-semibold">Medicine Details:</span>{" "}
                     {selectedProduct.shortDescription.slice(0, 150)}
                   </h1>
-                </div>
-                <div className=" flex justify-end">
-                  <CommonButton textSize={"text-lg"}></CommonButton>
                 </div>
               </div>
             </div>

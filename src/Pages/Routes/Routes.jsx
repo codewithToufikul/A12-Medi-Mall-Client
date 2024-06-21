@@ -20,10 +20,14 @@ import PaymentsHistory from "../DashboardPages/Pages/PaymentsHistory/PaymentsHis
 import ManageAdd from "../DashboardPages/Pages/ManageAdd/ManageAdd";
 import DashboardHome from "../DashboardPages/Pages/DashboardHome/DashboardHome";
 import ReportSell from "../DashboardPages/Pages/ReportSell/ReportSell";
+import PrivetRoutes from "./PrivetRoutes/PrivetRoutes";
+import SellerRoutes from "./SellerRoutes/SellerRoutes";
+import ErrorPage from "../ErrorPage/ErrorPage";
 
 export const router = createBrowserRouter([
   {
     path: "/",
+    errorElement: <ErrorPage></ErrorPage>,
     element: <Main></Main>,
     children: [
       {
@@ -48,25 +52,26 @@ export const router = createBrowserRouter([
       },
       {
         path: "/carts",
-        element: <ManageCart></ManageCart>,
+        element: <PrivetRoutes><ManageCart></ManageCart></PrivetRoutes>,
       },
       {
         path: "/checkout",
-        element: <CheckoutPage></CheckoutPage>,
+        element: <PrivetRoutes><CheckoutPage></CheckoutPage></PrivetRoutes>,
       },
       {
         path: "/invoice",
-        element: <InvoicePage></InvoicePage>,
+        element: <PrivetRoutes><InvoicePage></InvoicePage></PrivetRoutes>,
       },
     ],
   },
   {
     path: "/dashboard",
+    errorElement: <ErrorPage></ErrorPage>,
     element: <Dashboard></Dashboard>,
     children: [
       {
         path: "home",
-        element: <DashboardHome></DashboardHome>
+        element: <PrivetRoutes><DashboardHome></DashboardHome></PrivetRoutes>
       },
       // admin route
       {
@@ -74,7 +79,9 @@ export const router = createBrowserRouter([
         element: (
           <AdminRoute>
             {" "}
+            <PrivetRoutes>
             <ManageUser></ManageUser>
+            </PrivetRoutes>
           </AdminRoute>
         ),
       },
@@ -82,7 +89,7 @@ export const router = createBrowserRouter([
         path: "manage-category",
         element: (
           <AdminRoute>
-            <ManageCategory></ManageCategory>
+            <PrivetRoutes><ManageCategory></ManageCategory></PrivetRoutes>
           </AdminRoute>
         ),
       },
@@ -90,7 +97,7 @@ export const router = createBrowserRouter([
         path: "manage-payments",
         element: (
           <AdminRoute>
-            <ManagePayments></ManagePayments>
+            <PrivetRoutes><ManagePayments></ManagePayments></PrivetRoutes>
           </AdminRoute>
         ),
       },
@@ -98,33 +105,33 @@ export const router = createBrowserRouter([
         path: "manage-advice",
         element: (
           <AdminRoute>
-            <ManageAdvice></ManageAdvice>
+            <PrivetRoutes><ManageAdvice></ManageAdvice></PrivetRoutes>
           </AdminRoute>
         ),
       },
       {
         path: 'report-sale',
         element: <AdminRoute>
-          <ReportSell></ReportSell>
+          <PrivetRoutes><ReportSell></ReportSell></PrivetRoutes>
         </AdminRoute>
       },
       // user route
       {
         path: "payment-history",
-        element: <UserPaymentHistiry></UserPaymentHistiry>,
+        element: <PrivetRoutes><UserPaymentHistiry></UserPaymentHistiry></PrivetRoutes>,
       },
       // seller route
       {
         path: "manage-medicine",
-        element: <ManageMedicine></ManageMedicine>,
+        element: <SellerRoutes><PrivetRoutes><ManageMedicine></ManageMedicine></PrivetRoutes></SellerRoutes>,
       },
       {
         path: "payments-history",
-        element: <PaymentsHistory></PaymentsHistory>
+        element: <SellerRoutes><PrivetRoutes><PaymentsHistory></PaymentsHistory></PrivetRoutes></SellerRoutes>,
       },
       {
         path: "manage-add",
-        element: <ManageAdd></ManageAdd>
+        element: <SellerRoutes><PrivetRoutes><ManageAdd></ManageAdd></PrivetRoutes></SellerRoutes>,
       }
     ],
   },
