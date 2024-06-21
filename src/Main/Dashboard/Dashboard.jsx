@@ -6,7 +6,7 @@ import { MdOutlinePayments } from "react-icons/md";
 import { NavLink, Outlet } from "react-router-dom";
 import navLogo from "../../assets/navLogo.png";
 import { TbFileReport } from "react-icons/tb";
-import { RiAdvertisementLine } from "react-icons/ri";
+import { RiAdvertisementFill, RiAdvertisementLine } from "react-icons/ri";
 import useAdmin from "../../Hooks/useAdmin";
 import useSeller from "../../Hooks/useSeller";
 
@@ -27,7 +27,7 @@ const Dashboard = () => {
               ? "text-custom-custom font-bold font-inter text-base"
               : "text-base font-inter"
           }
-          to="home"
+          to="/dashboard/home"
         >
           <div className="flex items-center gap-2">
             <p className="text-xl">
@@ -134,7 +134,7 @@ const Dashboard = () => {
               ? "text-custom-custom font-bold font-inter text-base"
               : "text-base font-inter"
           }
-          to="seller-home"
+          to="/dashboard/home"
         >
           <div className="flex items-center gap-2">
             <p className="text-xl">
@@ -185,13 +185,13 @@ const Dashboard = () => {
               ? "text-custom-custom font-bold font-inter text-base"
               : "text-base font-inter"
           }
-          to="payments-history"
+          to="manage-add"
         >
           <div className="flex items-center gap-2">
             <p>
-              <MdOutlinePayments size={25} />
+              <RiAdvertisementFill size={25} />
             </p>
-            <p>PAYMENTS HISTORY</p>
+            <p className="uppercase">advertizement</p>
           </div>
         </NavLink>
       </li>
@@ -207,7 +207,7 @@ const Dashboard = () => {
               ? "text-custom-custom font-bold font-inter text-base"
               : "text-base font-inter"
           }
-          to="user-home"
+          to="/dashboard/home"
         >
           <div className="flex items-center gap-2">
             <p className="text-xl">

@@ -81,29 +81,8 @@ const Shop = () => {
           </label>
         </div>
       </div>
-      <div className="grid grid-cols-4 gap-4 mt-7 max-w-[1400px] mx-auto">
-        <div className="col-span-1">
-          <h2 className="pl-4 text-2xl mb-4">PRODUCT CATEGORIES</h2>
-          <div className="p-4">
-            <ul className="space-y-2">
-              <li className="text-lg p-3 bg-gray-100 hover:bg-white">Tablet</li>
-              <li className="text-lg p-3 bg-gray-100 hover:bg-white">
-                Injection
-              </li>
-              <li className="text-lg p-3 bg-gray-100 hover:bg-white">
-                Capsules
-              </li>
-              <li className="text-lg p-3 bg-gray-100 hover:bg-white">Syrup</li>
-              <li className="text-lg p-3 bg-gray-100 hover:bg-white">
-                Personal Care
-              </li>
-              <li className="text-lg p-3 bg-gray-100 hover:bg-white">
-                Health Device
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div className="col-span-3">
+      <div className="  mt-7 max-w-[1400px] mx-auto">
+        <div className="">
     
             <>
               <div className="flex justify-end mt-[-40px]">
@@ -137,7 +116,7 @@ const Shop = () => {
                         <th className="text-lg">Name</th>
                         <th className="text-lg">Category</th>
                         <th className="text-lg">Company</th>
-                        <th className="text-lg">Unit Price</th>
+                        <th className="text-lg">Per Unit Price</th>
                         <th className="text-lg text-center">Action</th>
                       </tr>
                     </thead>

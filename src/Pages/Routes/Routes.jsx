@@ -20,6 +20,8 @@ import AdminRoute from "./AdminRoute/AdminRoute";
 import ManageMedicine from "../DashboardPages/Pages/ManageMedicine/ManageMedicine";
 import SellerHome from "../DashboardPages/Pages/SellerHome/SellerHome";
 import PaymentsHistory from "../DashboardPages/Pages/PaymentsHistory/PaymentsHistory";
+import ManageAdd from "../DashboardPages/Pages/ManageAdd/ManageAdd";
+import DashboardHome from "../DashboardPages/Pages/DashboardHome/DashboardHome";
 
 export const router = createBrowserRouter([
   {
@@ -64,15 +66,11 @@ export const router = createBrowserRouter([
     path: "/dashboard",
     element: <Dashboard></Dashboard>,
     children: [
-      // admin route
       {
         path: "home",
-        element: (
-          <AdminRoute>
-            <TotalSale></TotalSale>
-          </AdminRoute>
-        ),
+        element: <DashboardHome></DashboardHome>
       },
+      // admin route
       {
         path: "manage-user",
         element: (
@@ -108,10 +106,6 @@ export const router = createBrowserRouter([
       },
       // user route
       {
-        path: "user-home",
-        element: <UserHome></UserHome>,
-      },
-      {
         path: "payment-history",
         element: <UserPaymentHistiry></UserPaymentHistiry>,
       },
@@ -121,12 +115,12 @@ export const router = createBrowserRouter([
         element: <ManageMedicine></ManageMedicine>,
       },
       {
-        path: "seller-home",
-        element: <SellerHome></SellerHome>,
-      },
-      {
         path: "payments-history",
         element: <PaymentsHistory></PaymentsHistory>
+      },
+      {
+        path: "manage-add",
+        element: <ManageAdd></ManageAdd>
       }
     ],
   },

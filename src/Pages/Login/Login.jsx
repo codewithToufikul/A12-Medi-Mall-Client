@@ -21,9 +21,10 @@ const Login = () => {
     loginUser(data.email, data.password)
       .then((result) => {
         setLoading(false);
-        toast.success("successfully logged!");
+        const token = result.user.stsTokenManager.accessToken;
+        localStorage.setItem('access-token', token);
+        toast.success("Successfully logged in!");
         navigete(location?.state ? location.state : "/");
-        console.log(result);
       })
       .catch((error) => {
         setLoading(false);
@@ -31,6 +32,7 @@ const Login = () => {
         console.error(error);
       });
   };
+  
   return (
     <div className="font-[sans-serif] bg-gray-900 text-[#333] md:h-screen">
       <Helmet>

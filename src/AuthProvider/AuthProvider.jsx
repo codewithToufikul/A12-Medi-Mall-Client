@@ -46,27 +46,31 @@ const AuthProvider = ({children}) => {
         googleLogin,
         loading
     }
-    useEffect(()=>{
-        const unSubscribe = onAuthStateChanged(auth, currentUser  =>{
-            setUser(currentUser)
-            setLoading(false)
-            if(currentUser){
-                const userInfo = {email: currentUser.email};
-                axiosPublic.post("/jwt", userInfo)
-                .then(res=>{
-                    if(res.data.token){
-                        localStorage.setItem('access-token', res.data.token)
-                    }
-                })
-            }
-            else{
-                localStorage.removeItem('access-token')
-            }
+    useEffect(() => {
+        const unSubscribe = onAuthStateChanged(auth, currentUser => {
+          setUser(currentUser);
+          setLoading(false);
+          if (currentUser) {
+            const userInfo = { email: currentUser.email };
+            axiosPublic.post("/jwt", userInfo)
+              .then(res => {
+                if (res.data.token) {
+                  localStorage.setItem('access-token', res.data.token);
+                }
+              })
+              .catch(error => {
+                console.error('Failed to store the token:', error);
+              });
+          } else {
+            localStorage.removeItem('access-token');
+          }
         });
-        return()=>{
-            unSubscribe();
-        }
-    },[])
+      
+        return () => {
+          unSubscribe();
+        };
+      }, []);
+      
     return (
         <AuthContext.Provider value={value}>
             {children}
