@@ -38,6 +38,12 @@ Some bullet points features and characteristics for this website :-
 
 7.Mobile-Friendly Design: Optimized for mobile devices to ensure a seamless shopping experience on the go.
 
+8.A responsive user friendly desing.
+
+9.For Payment a very easy stripe method.
+
+10.Full Site Protected with json web token
+
 In this website used npm package name:-
 
 1.React Tanstack query
