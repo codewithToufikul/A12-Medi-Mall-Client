@@ -7,7 +7,7 @@ const Blogs = () => {
         top={`let's see`}
         text={"read our latest blogs"}
       ></SectionHead>
-      <div className=" grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-8 mt-[60px]">
+      <div className=" grid lg:grid-cols-3 px-4 md:grid-cols-2 grid-cols-1 gap-8 mt-[60px]">
         <div className="card card-compact rounded-none ">
           <figure>
             <img src="https://i.ibb.co/Fqxbmrz/blog-one-1.jpg" alt="Shoes" />

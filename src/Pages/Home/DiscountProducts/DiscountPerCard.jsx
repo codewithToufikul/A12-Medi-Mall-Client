@@ -48,17 +48,17 @@ const DiscountPerCard = ({product}) => {
     return (
         <div className=" bg-orange-50 pt-12 pb-9 rounded-lg ">
             <div className="flex flex-col justify-center items-center">
-                <h3 className=" text-xl font-medium">{medicineName}</h3>
-                <h1 className={`text-2xl font-semibold`}>{genericName}</h1>
+                <h3 className=" text-lg lg:text-xl font-medium">{medicineName}</h3>
+                <h1 className={`text-xl lg:text-2xl font-semibold`}>{genericName}</h1>
                 <div className=" relative mt-7">
-                <div className=" flex justify-center items-center  bg-orange-100 w-72 h-72 rounded-full ">
-                    <img className=" w-62" src={medicineImage} alt="" />
+                <div className=" flex justify-center items-center  bg-orange-100 lg:w-72 w-52 h-52 lg:h-72 rounded-full ">
+                    <img className=" w-44 lg:w-62" src={medicineImage} alt="" />
                 </div>
-                <div className=" absolute -top-3 -left-3 bg-custom-custom w-24  p-5 flex justify-center items-center rounded-full">
-                <p className=" text-2xl font-bold text-white">{discountPercentage}% <br /> <span className=" text-xl font-normal">OFF</span></p>
+                <div className=" absolute -top-3 -left-3 bg-custom-custom w-16 lg:w-24  p-5 flex justify-center items-center rounded-full">
+                <p className=" text-xl lg:text-2xl font-bold text-white">{discountPercentage}% <br /> <span className=" text-xl font-normal">OFF</span></p>
                 </div>
                 </div>
-                <div className=" flex justify-between items-center w-full px-14 mt-6">
+                <div className=" flex justify-between items-center w-full lg:px-14 px-7 mt-6">
                 <div className=" flex  gap-3">
                     <p className="  text-lg font-semibold line-through">${perUnitPrice}</p>
                     <p className=" text-3xl font-medium text-custom-custom">${lastDiscounted}</p>

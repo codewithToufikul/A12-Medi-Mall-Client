@@ -122,8 +122,8 @@ const CategoryDetails = () => {
                 ✕
               </button>
             </form>
-            <div className=" grid items-center grid-cols-2 p-10">
-              <div className=" w-[400px]">
+            <div className=" grid items-center grid-cols-1 lg:grid-cols-2 p-10">
+              <div className=" md:w-[400px]">
                 <img
                   className=""
                   src={selectedProduct.medicineImage}
@@ -162,10 +162,10 @@ const CategoryDetails = () => {
                   <span className=" font-semibold">Discount:</span>{" "}
                   {selectedProduct.discountPercentage}%
                 </h1>
-                <div className=" mb-5 w-[600px]">
+                <div className=" mb-5 lg:w-[600px]">
                   <h1 className=" text-lg">
                     <span className=" font-semibold">Medicine Details:</span>{" "}
-                    {selectedProduct.shortDescription.slice(0, 150)}
+                    {selectedProduct.shortDescription.slice(0, 130)}
                   </h1>
                 </div>
                 <div className=" flex justify-end">

@@ -295,7 +295,7 @@ const Dashboard = () => {
 
   return (
     <div className="flex flex-col lg:flex-row w-full">
-      <div className="lg:sticky z-40 left-0 top-0 px-8 bg-base-300 lg:w-[300px] w-full lg:h-screen">
+      <div className="lg:sticky sticky top-0  z-40 lg:left-0 lg:top-0 px-8 bg-base-300 lg:w-[300px] w-full lg:h-screen">
         <img className="hidden lg:block" src={navLogo} alt="" />
         <div className="px-1 mt-5">
           <ul className="space-y-6 border-b-4 border-black pb-10 lg:block hidden">
@@ -309,12 +309,12 @@ const Dashboard = () => {
           </ul>
           <ul className="space-y-6 pt-10 lg:block hidden">{bottomNav}</ul>
         </div>
-        <div className="lg:hidden flex justify-end px-4 py-3 bg-base-300">
+        <div className="lg:hidden flex px-4 py-3  ">
           
           <div className="drawer">
           <input id="my-drawer" type="checkbox" className="drawer-toggle" />
-          <div className="drawer-content">
-            {/* Page content here */}
+          <div className=" flex justify-between drawer-content">
+            <img className=" w-[120px]" src={navLogo} alt="" />
             <label htmlFor="my-drawer" className=" drawer-button "><TiThMenuOutline size={25} /></label>
           </div> 
           <div className="drawer-side">

@@ -229,7 +229,7 @@ const Shop = () => {
                 ✕
               </button>
             </form>
-            <div className="flex gap-4 p-8 justify-center items-center w-fit">
+            <div className="flex lg:flex-row flex-col gap-4 p-8 justify-center items-center w-fit">
               <img
                 src={selectedProduct.medicineImage}
                 alt="Shoes"
@@ -240,7 +240,7 @@ const Shop = () => {
                   {selectedProduct.medicineName}
                 </h3>
                 <p className="py-4 max-w-lg text-lg">
-                  {selectedProduct.shortDescription}
+                  {selectedProduct.shortDescription.slice(0,130)}
                 </p>
                 <p className="text-lg">
                   <span className="font-semibold">Generic Name: </span>
