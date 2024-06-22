@@ -33,7 +33,7 @@ const CheckoutForm = ({ totalAmount }) => {
     try {
       const {
         data: { clientSecret },
-      } = await axios.post("http://localhost:5000/create-payment-intent", {
+      } = await axios.post("https://medi-mall-server.vercel.app/create-payment-intent", {
         amount: totalAmount,
         email: user.email,
       });
@@ -55,7 +55,7 @@ const CheckoutForm = ({ totalAmount }) => {
 
         // const currentDate = new Date().toISOString();
 
-        await axios.post("http://localhost:5000/save-payment-details", {
+        await axios.post("https://medi-mall-server.vercel.app/save-payment-details", {
           paymentIntent: payload.paymentIntent,
           userEmail: user.email,
           status: 'pending',
@@ -87,7 +87,7 @@ const CheckoutForm = ({ totalAmount }) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      
+
       <CardElement />
       <div className="flex justify-center mt-5">
         <button className="mt-8 btn text-lg bg-custom-custom text-white" disabled={processing || succeeded} type="submit">
