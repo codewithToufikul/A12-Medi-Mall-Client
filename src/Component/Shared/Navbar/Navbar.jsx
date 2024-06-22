@@ -128,8 +128,8 @@ const Navbar = () => {
         <details className="dropdown mr-10 lg:block hidden">
           <summary className="m-1 text-lg underline font-semibold cursor-pointer">Language</summary>
           <ul className="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box">
-            <li><a>Item 1</a></li>
-            <li><a>Item 2</a></li>
+            <li><a>English</a></li>
+            <li><a>Bangla</a></li>
           </ul>
         </details>
         {
@@ -143,7 +143,7 @@ const Navbar = () => {
                 </div>
               </div>
               <ul tabIndex={0} className="menu dropdown-content z-[1] p-2 shadow bg-base-100 rounded-box w-52 mt-4">
-                <li><a className=" text-lg">Update Profile</a></li>
+                <li className=" text-lg"><NavLink to="/update-profile" >Update Profile</NavLink></li>
                 <li className=" text-lg">
                 <NavLink to={
                     '/dashboard/home'

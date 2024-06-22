@@ -2,12 +2,12 @@ import SectionHead from "../../../Component/SectionHead";
 
 const Blogs = () => {
   return (
-    <div className=" my-[70px]  mx-2 lg:my-[130px] max-w-[1440px] mx-auto">
+    <div className=" my-[70px]   lg:my-[130px] max-w-[1440px] mx-auto">
       <SectionHead
         top={`let's see`}
         text={"read our latest blogs"}
       ></SectionHead>
-      <div className=" flex flex-wrap gap-8 mt-[60px]">
+      <div className=" grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-8 mt-[60px]">
         <div className="card card-compact rounded-none ">
           <figure>
             <img src="https://i.ibb.co/Fqxbmrz/blog-one-1.jpg" alt="Shoes" />

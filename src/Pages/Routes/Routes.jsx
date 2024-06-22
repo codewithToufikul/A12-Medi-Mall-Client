@@ -23,6 +23,7 @@ import ReportSell from "../DashboardPages/Pages/ReportSell/ReportSell";
 import PrivetRoutes from "./PrivetRoutes/PrivetRoutes";
 import SellerRoutes from "./SellerRoutes/SellerRoutes";
 import ErrorPage from "../ErrorPage/ErrorPage";
+import UpdateProfile from "../UpdateProfile/UpdateProfile";
 
 export const router = createBrowserRouter([
   {
@@ -62,6 +63,10 @@ export const router = createBrowserRouter([
         path: "/invoice",
         element: <PrivetRoutes><InvoicePage></InvoicePage></PrivetRoutes>,
       },
+      {
+        path: "/update-profile",
+        element: <PrivetRoutes><UpdateProfile></UpdateProfile></PrivetRoutes>
+      }
     ],
   },
   {
