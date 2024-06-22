@@ -51,7 +51,7 @@ const SocialLogin = () => {
       <p onClick={handleGoogleLogin} className=" cursor-pointer text-4xl">
         <FcGoogle />
       </p>
-      <p onClick={handleGithubLogin} className=" text-4xl">
+      <p onClick={handleGithubLogin} className=" cursor-pointer text-4xl">
         <FaGithub />
       </p>
 

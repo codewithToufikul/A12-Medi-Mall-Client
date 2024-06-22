@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import UseAdvice from "../../../Hooks/UseAdvice";
 import AdviceSlider from "../AdviceSlider/AdviceSlider";
 import Blogs from "../Blogs/Blogs";
@@ -15,6 +16,9 @@ const Home = () => {
     }
     return (
         <div>
+            <Helmet>
+                <title>MediMall || Home</title>
+            </Helmet>
             <div className=" bg-base-200">
             <div className=" max-w-[1540px] mx-auto">
             <AdviceSlider/>
