@@ -46,16 +46,18 @@ Some bullet points features and characteristics for this website :-
 
 In this website used npm package name:-
 
-1.React Tanstack query
+1.Json Web Token(JWT)
 
-2.React Hook Form
+2.React Tanstack query
 
-3.React-Export-Table-to-Excel
+3.React Hook Form
 
-4.React to pdf
+4.React-Export-Table-to-Excel
 
-5.React Helmet
+5.React to pdf
 
-6.React swiper slider
+6.React Helmet
 
-7.React Date Pecker
+7.React swiper slider
+
+8.React Date Pecker
