@@ -204,7 +204,7 @@ const ManageMedicine = () => {
                         Per Unit Price
                       </label>
                       <input
-                        type="number"
+                        type="text"
                         name="perUnitPrice"
                         {...register("perUnitPrice", { required: true })}
                         className="mt-1 w-full p-2 border border-gray-300 rounded-md"

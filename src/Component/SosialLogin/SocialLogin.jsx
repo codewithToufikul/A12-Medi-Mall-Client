@@ -6,9 +6,9 @@ import usePublicAxios from "../../Hooks/usePublicAxios";
 import { useNavigate } from "react-router-dom";
 
 const SocialLogin = () => {
-    const axiosPublic = usePublicAxios()
-  const { googleLogin } = useContext(AuthContext);
-  const navigate = useNavigate()
+  const axiosPublic = usePublicAxios();
+  const { googleLogin, githubLogin } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const handleGoogleLogin = () => {
     googleLogin()
@@ -17,13 +17,30 @@ const SocialLogin = () => {
         const userInfo = {
           email: result.user?.email,
           name: result.user?.displayName,
-          role: 'user'
+          role: "user",
         };
-        axiosPublic.post('/users', userInfo)
-            .then(res =>{
-                console.log(res.data);
-                navigate('/');
-            })
+        axiosPublic.post("/users", userInfo).then((res) => {
+          console.log(res.data);
+          navigate("/");
+        });
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+  const handleGithubLogin = () => {
+    githubLogin()
+      .then((result) => {
+        console.log(result.user);
+        const userInfo = {
+          email: result.user?.email,
+          name: result.user?.displayName,
+          role: "user",
+        };
+        axiosPublic.post("/users", userInfo).then((res) => {
+          console.log(res.data);
+          navigate("/");
+        });
       })
       .catch((error) => {
         console.error(error);
@@ -34,7 +51,7 @@ const SocialLogin = () => {
       <p onClick={handleGoogleLogin} className=" cursor-pointer text-4xl">
         <FcGoogle />
       </p>
-      <p className=" text-4xl">
+      <p onClick={handleGithubLogin} className=" text-4xl">
         <FaGithub />
       </p>
 

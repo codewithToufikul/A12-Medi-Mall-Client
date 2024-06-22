@@ -37,11 +37,11 @@ const SellerHome = () => {
      <div className=" flex lg:flex-row flex-col justify-center items-center gap-7 mt-10">
         <div className=" bg-green-200 p-12 text-center space-y-2">
             <h1 className=" text-3xl">PAID TOTAL:</h1>
-            <h2 className="text-3xl">${totalPaidPrice}</h2>
+            <h2 className="text-3xl">${totalPaidPrice.toFixed(2)}</h2>
         </div>
         <div className=" bg-red-200 p-12 text-center space-y-2">
             <h1 className=" text-3xl">PENDING TOTAL:</h1>
-            <h1 className=" text-3xl">${totalPendingPrice}</h1>
+            <h1 className=" text-3xl">${totalPendingPrice.toFixed(2)}</h1>
         </div>
      </div>
     </div>

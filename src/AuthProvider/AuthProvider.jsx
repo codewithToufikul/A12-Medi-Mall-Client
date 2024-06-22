@@ -3,7 +3,9 @@ import { createContext, useEffect, useState } from "react";
 import { auth } from "../FireBase/firebase.config";
 import { GoogleAuthProvider } from "firebase/auth";
 import usePublicAxios from "../Hooks/usePublicAxios";
+import { GithubAuthProvider } from "firebase/auth";
 
+const githubProvider = new GithubAuthProvider();
 const googleProvider = new GoogleAuthProvider();
 export const AuthContext = createContext(null)
 // eslint-disable-next-line react/prop-types
@@ -36,6 +38,9 @@ const AuthProvider = ({children}) => {
         setLoading(true)
         return signInWithPopup(auth, googleProvider)
     }
+    const githubLogin = ()=>{
+        return signInWithPopup(auth, githubProvider)
+    }
 
     const value = {
         signUpUser,
@@ -44,7 +49,8 @@ const AuthProvider = ({children}) => {
         user,
         logoutUser,
         googleLogin,
-        loading
+        loading,
+        githubLogin
     }
     useEffect(() => {
         const unSubscribe = onAuthStateChanged(auth, currentUser => {
